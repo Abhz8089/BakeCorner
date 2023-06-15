@@ -1,0 +1,431 @@
+<body>
+  <style>
+    body {
+      background-image: url(/public/project-images/blur.jpg);
+    }
+
+    .bg-image {
+      background-color: #ffde31;
+    }
+
+    .gif-image {
+      width: 100%;
+    }
+
+    .title-style {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: hsl(52, 0%, 98%);
+    }
+
+    .title-quote {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: 400;
+      color: hsl(52, 0%, 98%);
+    }
+
+    .card-body {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      /* align-content: space-around; */
+      justify-content: space-evenly;
+      align-items: center;
+    }
+     .name_required .special {
+    display: none; /* Hide the error message by default */
+    color: red; /* Set the text color to red */
+    font-size: 14px; /* Set the font size */
+    margin-top: 5px; /* Add some spacing */
+  }
+    .phone_required .special {
+    display: none; /* Hide the error message by default */
+    color: red; /* Set the text color to red */
+    font-size: 14px; /* Set the font size */
+    margin-top: 5px; /* Add some spacing */
+  }
+  </style>
+
+  <div class="container py-5">
+    <div class="container py-5" style="overflow-y: scroll; max-height: 500px;">
+
+      <h3 class="mb-4" style="
+
+          background: #e3c100;
+          color: black;
+          text-align: center;">Select an Address</h3>
+
+      <!-- Address Cards -->
+      {{#each addresses}}
+      <div class="address-cards">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title "><i class="bi bi-person-circle"></i> {{this.address.name}}</h5>
+            <p class="card-text">{{this.address.address}}</p>
+            <p class="card-text">{{this.address.pincode}}</p>
+
+
+        
+
+            <!-- Edit and Delete Buttons -->
+            <div class="text-end mt-3">
+              {{!-- <button type="button" class="btn btn-danger btn-floating" value="efit">
+
+              </button> --}}
+              {{!--
+              <a class="btn btn-outline-danger btn-rounded delete-address" data-mdb-ripple-color="dark"
+                onclick="delete('{{this.userId}}')">delete</a> --}}
+              <button class="btn btn-outline-danger btn-rounded" data-mdb-ripple-color="dark"
+                onclick="deleteAddress('{{this._id}}')">delete</button>
+
+
+
+              {{!-- ------------------- --}}
+              {{!-- <div class="pic"> --}}
+                {{!-- <div class="row"> --}}
+                  <!-- Add product button triggers the modal -->
+                  <button type="button" class="btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark"
+                    data-toggle="modal" data-target="#editAddressModal">Edit</button>
+                  {{!--
+                </div> --}}
+
+                <div class="modal fade" id="editAddressModal" tabindex="-1" role="dialog"
+                  aria-labelledby="editAddressModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editAddressModal">Edit Address</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/edit-address" method="POST">
+                          <label for="">Name</label>
+                          <input type="text" name="name" value="{{this.address.name}}" class="form-control" required>
+                          <label for="">Address</label>
+                          <input type="text" name="address" value="{{this.address.address}}" class="form-control"
+                            required>
+                          <label for="">Phone:</label>
+                          <input type="number" name="phone" value="{{this.address.phone}}" class="form-control" min="0"
+                            step="0.01" required>
+                          <input type="text" name="id" value="{{this._id}}" hidden>
+
+                          <label for="description">pincode</label>
+                          <input type="text" name="pincode" value="{{this.address.pincode}}" class="form-control"
+                            required>
+
+
+                          <button type="submit"
+                            onclick='return confirm("Are you sure do you want to edit this address ?")'
+                            class="btn btn-primary mt-2">Edit</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{!--
+              </div> --}}
+              {{!-- ----------------------------- --}}
+
+
+              <a href="/user-address/{{this._id}}" class="btn btn-outline-success btn-rounded"
+                data-mdb-ripple-color="dark">Use</a>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more address cards here if needed -->
+      </div>
+      {{/each}}
+    </div>
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col">
+        <div class="card my-4 shadow-3">
+          <div class="row g-0">
+            <div class="col-xl-6 d-xl-block bg-image">
+              <img src="/public/project-images/delivery.png" alt="Sample photo" class="img-fluid" />
+              <img src="/public/project-images/delivery gif.gif" alt="Delivery GIF" class="img-fluid gif-image" />
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body p-md-5 text-black">
+
+                <form action="" id="checkout-form">
+                  <h3 class="mb-4 text-uppercase">ADD ADDRESS</h3>
+                  <div class="row">
+                    {{#if address}}
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" name="name" id="form3Example1m" value="{{address.[0].address.name}}"
+                          class="form-control form-control-lg" />
+                        <label class="form-label" name="name" for="form3Example1m">Name</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="phone" name="phone" id="form3Example1n" value="{{address.[0].address.phone}}"
+                          class="form-control form-control-lg" />
+                        <label class="form-label" name="phone" for="form3Example1n">Phone</label>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="form-outline mb-4">
+                    <input type="text" name="address" id="form3Example8" value="{{address.[0].address.address}}"
+                      class="form-control form-control-lg" />
+                    <label class="form-label" name="address" for="form3Example8">Address</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" name="pincode" id="form3Example3" value="{{address.[0].address.pincode}}"
+                      class="form-control form-control-lg" />
+                    <label class="form-label" name="pincode" for="form3Example3">pincode</label>
+                  </div>
+                  <input type="text" name="userId" id="" value="{{users._id}}" hidden>
+
+                  {{else}}
+
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input type="text" name="name" id="form3Example1m" class="form-control form-control-lg" />
+                      <label class="form-label" name="name" for="form3Example1m">Name</label>
+                        <div class="name_required">
+                            <ul class="special">
+                              <li>Name must be at least 3 characters long</li>
+                            </ul>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input type="phone" name="phone" id="form3Example1n" class="form-control form-control-lg" />
+                      <label class="form-label" name="phone" for="form3Example1n">Phone</label>
+                       <div class="phone_required">
+                            <ul class="special">
+                              <li>Invalid phone number</li>
+                            </ul>
+                          </div>
+                    </div>
+                  </div>
+              </div>
+
+
+
+              <div class="form-outline mb-4">
+                <input type="text" name="address" id="form3Example8" class="form-control form-control-lg" />
+                <label class="form-label" name="address" for="form3Example8">Address</label>
+              </div>
+
+
+              <div class="form-outline mb-4">
+                <input type="text" name="pincode" id="form3Example3" class="form-control form-control-lg" />
+                <label class="form-label" name="pincode" for="form3Example3">pincode</label>
+              </div>
+              <input type="text" name="userId" id="" value="{{users._id}}" hidden>
+
+             
+              {{/if}}
+              <div class="form-outline mb-4">
+
+                <label class="form-label" name="total-amount" for="form3Example4" style="font-weight: 500;">Total
+                  Amount</label>
+                <p><b>₹{{total}}</b></p>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label" for="form3Example5">Payment Method</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment-method" id="cash-on-delivery" value="COD"
+                    checked />
+                  <label class="form-check-label" for="cash-on-delivery">
+                    Cash on Delivery
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment-method" id="online-payment"
+                    value="ONLINE" />
+                  <label class="form-check-label" for="online-payment">
+                    Online Payment
+                  </label>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-end pt-3">
+                <button type="submit" class="btn btn-success btn-lg ms-2" style="background-color: hsl(210, 100%, 50%)">
+                  PLACE ORDER
+                </button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+
+
+<script>
+  $('#checkout-form').submit((e) => {
+    e.preventDefault()
+      const nameInput = $('#form3Example1m');
+    const nameError = $('.name_required .special');
+      const phoneInput = $('#form3Example1n');
+    const phoneError = $('.phone_required .special');
+
+    const nameValue = nameInput.val();
+    const phoneValue= phoneInput.val()
+    if (nameValue.length < 3) {
+      nameError.css('display', 'block'); // Show the error message
+    }else if(phoneValue.length<10 || phoneValue.length>10){
+      phoneError.css('display', 'block');
+      } else {
+      nameError.css('display', 'none'); // Hide the error message
+          Swal.fire({
+      title: 'Are you sure to confirm this order?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'confirm'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+
+        $.ajax({
+          url: '/place-order',
+          method: 'post',
+          data: $('#checkout-form').serialize(),
+          success: (response) => {
+
+            if (response.codSuccess) {
+              location.href = '/order-success'
+            } else {
+              razorpayPayment(response)
+            }
+          }
+        })
+
+      }
+    })
+    }
+
+
+
+
+  })
+  function razorpayPayment(order) {
+    var options = {
+      "key": "rzp_test_3LzlSFPtGLCQLv", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "BakeCorner",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+        
+        varifyPayment(response,order)
+      },
+      "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9000090000"
+      },
+      "notes": {
+        "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+        "color": "#3399cc"
+      }
+    };
+    var rzp1 = new Razorpay(options);
+     rzp1.open();
+  }
+   function varifyPayment(payment,order){
+    $.ajax({
+      url:'/verify-payment',
+      data:{
+        payment,
+        order
+      },
+      method:'post',
+      success:(response)=>{
+       
+        if(response.status){
+          location.href='/order-success'
+        }else{
+          
+          alert('payment failed')
+          location.href='/order-failed'
+        }
+      }
+    })
+   }
+
+</script>
+<script>
+  function deleteAddress(userId) {
+    console.log(userId)
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        $.ajax({
+          url: '/delete-address',
+          data: {
+            userId: userId
+          },
+          method: 'post',
+          success: async (response) => {
+            await swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+            location.reload();
+
+          },
+          error: function (xhr, status, error) {
+            console.log(error)
+          }
+
+        })
+
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
+
+
+  }
+
+</script>

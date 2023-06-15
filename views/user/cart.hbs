@@ -1,0 +1,287 @@
+<body>
+    <style>
+        button:focus {
+            outline: none;
+        }
+
+        /* CSS */
+        .wrapper {
+            opacity: 0;
+            transform: translateX(-100%);
+            animation: slideIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+
+    <div class="wrapper">
+
+        <div class="wrapper_content">
+            <div class="header_title">
+                <div class="title">
+                    MY SHOPPING CART :
+                </div>
+                <div class="amount">
+                    <b><span id="cart-count">{{cartCount}}</span> ITEMS</b>
+                </div>
+
+            </div>
+            {{#each products}}
+
+
+            <div class="product_wrap">
+                <div class="product_info">
+                    <div class="product_img">
+                        <a href="/view/{{this.product._id}}"> <img src="{{this.product.photos.[0].fileName}}"
+                                alt="ProductImage" width="200px" height="200px"></a>
+                    </div>
+                    <div class="product_data">
+                        <div class="description">
+                            <div class="main_header">
+                                {{this.product.name}}
+                            </div>
+                            <div class="sub_header">
+                                {{this.description}}
+                            </div>
+                        </div>
+
+                        <div class="qty">
+                            {{!-- <div class="size_select">
+                                <p>Size : <span>9</span></p>
+                            </div> --}}
+                            <div class="qty_select">
+                                {{!-- <p>Qty : <span>{{this.quantity}}</span></p> --}}
+                                <button class="cart-item-count mr-3" style="   
+                                 border: none;
+                                   height: 1.5rem;
+                                       background-color: #e4e4e4;
+                                width: 1.5rem;
+                               font-size: xx-large;font-weight: 700;"
+                                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button><span
+                                    id="{{this.product._id}}">{{this.quantity}}</span>
+                                <button class="cart-item-count ml-3" style="    border: none;
+                            height: 2.2rem;
+                            width: 1rem;
+                            font-size: xx-large;
+                                background-color: #e4e4e4;
+                            font-weight: 700;"
+                                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <div class="current_price">₹{{this.product.price}}</div>
+                            <div class="normal_price">$30</div>
+                            <div class="discount">15% OFF</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_btns">
+                    <div class="remove" onclick="removeProduct('{{this._id}}','{{this.product._id}}') ">
+                        REMOVE
+                    </div>
+
+                    <div class="whishlist">MOVE TO WHISHLIST</div>
+                </div>
+
+            </div>
+
+            {{/each}}
+
+            <div class="slider">
+                <div class="bg_shadow"></div>
+                <div class="select_size">
+                    <div class="header">
+                        <div class="slider_title">Select Size</div>
+                        <div class="close">X</div>
+                    </div>
+                    <div class="body">
+                        <ul>
+                            <li>6</li>
+                            <li>7</li>
+                            <li>8</li>
+                            <li class="active">9</li>
+                            <li>10</li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="button">DONE</div>
+                    </div>
+                </div>
+                <div class="select_quantity">
+                    <div class="header">
+                        <div class="slider_title">Select Quantity</div>
+                        <div class="close">X</div>
+                    </div>
+
+                    <div class="footer">
+                        <div class="button">DONE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper_amount">
+            <div class="header_title">
+                <div class="title">
+                    TOTAL PRICE DETAILS:
+                </div>
+                <div class="amount">
+                    <b> ₹<span id="total" class="total-amount">{{totalValue}}</span> </b>
+                </div>
+            </div>
+            <div class="price_details">
+                <div class="item">
+                    <p>Bag Total :</p>
+                    <b>₹<span id="total2" class="total-amount">{{totalValue}}</span> </b>
+                </div>
+
+
+                <div class="item">
+                    <p>Order Total :</p>
+                    <b>₹<span id="total3" class="total-amount">{{totalValue}}</span> </b>
+                </div>
+                <div class="item">
+                    <p>Delivery Charges :</p>
+                    <p><span style="text-decoration: line-through;"></span><span class="green">FREE</span></p>
+                </div>
+                <div class="coupon">
+                    <p>Coupon Discount:</p>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle btn-success" type="button" id="couponDropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Apply Coupon
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="couponDropdown">
+                            <form action="/couponCode" method="post">
+                            {{!-- <input type="text" class="form-control" id="couponCode" name="code" placeholder="Enter coupon code"> --}}
+                             <select name="code" class="form-control" required>
+                                        <option value="">Select coupon</option>
+                                        {{#each AllcCode}}
+                                        <option>{{this}}</option>
+                                        {{/each}}
+                                        <!-- Add more options as needed -->
+                                    </select>
+                            <button class="btn btn-primary" id="applyCouponBtn">Apply</button>
+                            </form>
+                        </div>
+                         
+                    </div>
+                    
+                </div>
+                      <form action="">
+                        <label for="">Wallet Amount: <b>₹{{walletAmount}}</b></label>
+                        <div>
+                        <button class="btn btn-success " onclick="walletApply('{{user}}','{{walletAmount}}',event)">Apply</button>
+                        </div>
+                      </form>
+                <div class="totals">
+                    <p>Total :</p>
+                    <b>₹<span class="total-amount" id="total1">{{totalValue}}</span> </b>
+                </div>
+            </div>
+            {{#if Tvalue}}
+            <div class="checkout">
+                <a href="/place-order" role="button" class="checkout_btn">Place Order</a>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</body>
+
+
+<script>
+    function changeQuantity(cartId, proId, userId, count) {
+        let quantity = parseInt(document.getElementById(proId).innerHTML)
+        count = parseInt(count)
+        $.ajax({
+            url: '/change-product-quantity',
+            data: {
+                user: userId,
+                cart: cartId,
+                product: proId,
+                count: count,
+                quantity: quantity
+
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+                    alert('product Removed from cart')
+                    location.reload()
+                } else {
+                    document.getElementById(proId).innerHTML = quantity + count
+                    document.getElementById('total').innerHTML = response.total
+                    document.getElementById('total1').innerHTML = response.total
+                    document.getElementById('total2').innerHTML = response.total
+                    document.getElementById('total3').innerHTML = response.total
+                }
+            }
+        })
+    }
+   
+
+
+    
+</script>
+
+
+<script>
+    function removeProduct(cartId, proId) {
+        $.ajax({
+            url: '/remove-product', // Replace with the URL that handles the removal on the server
+            method: 'POST',
+            data: {
+                cartId: cartId,
+                product: proId
+            },
+            success: function (response) {
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.log(error); // Handle error response
+            }
+        });
+    }
+
+    function walletApply(userId,wallet,event){
+        event.preventDefault();
+        $.ajax({
+            url:'/use-wallet',
+            method:'POST',
+            data:{
+                userId:userId,
+                wallet:wallet
+            },
+            success:function(response){
+                  document.getElementById('total').innerHTML = response.total
+                    document.getElementById('total1').innerHTML = response.total
+                    document.getElementById('total2').innerHTML = response.total
+                    document.getElementById('total3').innerHTML = response.total
+            }
+        })
+    }
+
+
+</script>
+
+<script>
+  // Check if the "msg" variable is present (to display success message)
+  {{#if msg}}
+    Swal.fire({
+      icon: '{{#if success}}success{{else}}error{{/if}}',
+      title: '{{msg}}',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  {{/if}}
+</script>

@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    line-height: normal;
+  }
+  
+  :root {
+    /* fonts */
+    --font-raleway: Raleway;
+    --font-inter: Inter;
+    --font-league-spartan: "League Spartan";
+    --font-poppins: Poppins;
+  
+    /* font sizes */
+    --font-size-mini: 15px;
+    --font-size-5xl: 24px;
+    --font-size-13xl: 32px;
+    --font-size-smi: 13px;
+    --font-size-sm: 14px;
+    --font-size-15xl: 34px;
+  
+    /* Colors */
+    --color-black: #000;
+    --color-white: #fff;
+    --color-yellow: #eee502;
+    --color-gray-100: #7b7b7b;
+    --color-olive: #ada82d;
+  }
+  

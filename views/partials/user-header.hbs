@@ -1,0 +1,198 @@
+{{!-- <header>
+    <style>
+        img {
+            width: 49px;
+            height: 36px;
+        }
+
+        nav {
+            background: #ffeb3bb8;
+        }
+
+        button {
+            color: white;
+            background: black;
+
+        }
+
+        .wishlist {
+            margin-left: 55%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0px 4px 3px 2px rgba(0, 0, 0, 0.25)
+        }
+    </style>
+    <nav class="navbar navbar-light justify-content-between ">
+        <div class="bclogo">
+            <img src="/public/project-images/Bake icon .png" alt="">
+        </div>
+        {{#if users}}
+        <a href="/login" class="#"> <img src="/public/project-images/whishlist-icon.png" alt=""></a>
+        {{/if}}
+
+
+
+        <div class="dropdown show">
+            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Hello
+                {{#if users}}
+                {{users.name}}
+                {{else}}
+                Guest
+                {{/if}}
+
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="    margin-left: -0.5rem;
+                  ">
+                {{#if users}}
+                <a class="dropdown-item" href="/logout" style=" margin-left: 10%;">Logout</a>
+                <a class="dropdown-item" href="/login" style=" margin-left: 10%;">Profile</a>
+                {{else}}
+                <a class="dropdown-item" href="/login" style=" margin-left: 10%;">login</a>
+                {{/if}}
+            </div>
+        </div>
+    </nav>
+</header>
+--}}
+<header>
+    <style>
+        /* CSS */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .image-wrapper {
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .custom-button {
+            margin-left: 19px;
+            margin-right: 18px;
+            background-color: rgb(0, 0, 0);
+            border: none;
+            color: rgb(6, 5, 5);
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .custom-button:hover {
+            background-color: rgb(19, 171, 8);
+            color: white;
+            transform: translateY(-2px);
+            cursor: pointer;
+        }
+
+        .custom-button:focus {
+            outline: none;
+        }
+
+        ,
+    </style>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s" style="    background-color: #e1e4eb;
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffff;">
+
+
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <a href="#view-footer" class="navbar-brand ms-4 ms-lg-0">
+                <div class="image-wrapper">
+                    <img src="/public/project-images/main logo.png" style="width: 4rem;" alt="">
+                </div>
+
+            </a>
+       
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                 <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+
+                    <h4 style="margin-top: 22px; font-family: Georgia, serif;
+                      font-weight: 800;    margin-left: .5rem;">BAKE CORNER</h4>
+
+                    <a href="/home" class="nav-item nav-link active" style=" margin-left: 5rem;">Home</a>
+                    <a href="#" class="nav-item nav-link" style=" margin-left: 3rem;">About Us</a>
+                    {{#if users}}
+                    <a href="/cart" class="nav-item nav-link" style=" margin-left: 3rem;">Cart<span class="badge badge-success"
+                            id="cart-count">{{cartCount}}</span></a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style=" margin-left: 3rem;">Options</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="/orders" class="dropdown-item">My Orders</a>
+                            <a href="/add-address" class="dropdown-item">Add address</a>
+                            <a href="/refferal-link" class="dropdown-item">Refer & get ₹100</a>
+                            <a href="/rewards" class="dropdown-item">Rewards</a>
+                            <a href="#" class="dropdown-item">wallet Amount : ₹{{users.wallet}}</a>
+                        </div>
+                    </div>
+                    {{else}}
+                    <a href="/signup" class="nav-item nav-link" style=" margin-left: 3rem;">Cart<span class="badge badge-success"
+                            id="cart-count">{{cartCount}}</span></a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style=" margin-left: 3rem;">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="/signup" class="dropdown-item">My Orders</a>
+
+
+                            <a href="404.html" class="dropdown-item">404 Page</a>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    <a href="contact.html" class="nav-item nav-link" style=" margin-left: 3rem;">Contact Us</a>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle custom-button" type="button" style=" margin-left: 3rem;"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <i class="fas fa-user"></i>
+                            {{#if users}}
+                            {{users.name}}
+                            {{else}}
+                            Guest
+                            {{/if}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            {{#if users}}
+                            <a class="dropdown-item" href=> profile</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                            {{else}}
+                            <a class="dropdown-item" href="/login">Login</a>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                </div>
+              
+
+
+
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+</header>

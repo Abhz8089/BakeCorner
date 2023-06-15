@@ -1,0 +1,924 @@
+{{!--
+
+<body>
+  <style>
+    .row {
+      margin-right: auto;
+    }
+
+    .product-grid {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      border-radius: 15px;
+      border: 1px solid #e7e7e7;
+      overflow: hidden;
+      transition: all 0.4s ease-out;
+    }
+
+    .product-grid:hover {
+      box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-grid .product-image {
+      position: relative;
+    }
+
+    .product-grid .product-image a.image {
+      display: block;
+    }
+
+    .product-grid .product-image img {
+      width: 100%;
+      height: auto;
+    }
+
+    .product-grid .product-discount-label {
+      color: #fff;
+      background: #78a206;
+      font-size: 14px;
+      font-weight: 400;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 5px;
+      position: absolute;
+      top: 12px;
+      left: 12px;
+    }
+
+    .product-grid .product-links {
+      width: 145px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      opacity: 0;
+      transform: translateX(-50%) translateY(-50%);
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transition: all 0.4s ease 0s;
+    }
+
+    .product-grid:hover .product-links {
+      opacity: 1;
+      top: 50%;
+    }
+
+    .product-grid .product-links li {
+      display: inline-block;
+      margin: 0 2px;
+    }
+
+    .product-grid .product-links li a {
+      color: #2c2c2c;
+      background: #fff;
+      font-size: 16px;
+      line-height: 42px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      display: block;
+      position: relative;
+      transition: all 0.4s ease-out 0s;
+    }
+
+    .product-grid .product-links li a:hover {
+      color: #fff;
+      background: #78a206;
+      box-shadow: 1px 1px 30px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .product-grid .product-links li a:before,
+    .product-grid .product-links li a:after {
+      content: attr(data-tip);
+      color: #fff;
+      background-color: #555;
+      font-size: 12px;
+      line-height: 18px;
+      padding: 5px 10px;
+      white-space: nowrap;
+      display: none;
+      transform: translateX(-50%);
+      position: absolute;
+      left: 50%;
+      top: -40px;
+      transition: all 0.3s ease 0s;
+    }
+
+    .product-grid .product-links li a:after {
+      content: '';
+      height: 10px;
+      width: 10px;
+      padding: 0;
+      transform: translateX(-50%) rotate(45deg);
+      top: -18px;
+      z-index: -1;
+    }
+
+    .product-grid .product-links li a:hover:before,
+    .product-grid .product-links li a:hover:after {
+      display: block;
+    }
+
+    .product-grid .product-content {
+      padding: 12px 12px 15px;
+      position: relative;
+    }
+
+    .product-grid .rating {
+      padding: 0;
+      margin: 0 0 8px;
+      list-style: none;
+    }
+
+    .product-grid .rating li {
+      color: #78a206;
+      font-size: 14px;
+    }
+
+    .product-grid .rating .far {
+      color: #808080;
+    }
+
+    .product-grid .title {
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 0 0 15px;
+    }
+
+    .product-grid .title a {
+      color: #2c2c2c;
+      transition: all 0.3s ease 0s;
+    }
+
+    .product-grid .title a:hover {
+      color: #78a206;
+    }
+
+    .product-grid .price {
+      color: #78a206;
+      font-size: 17px;
+      font-weight: 600;
+      display: block;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .product-grid .price span {
+      color: #999;
+      font-weight: 500;
+      text-decoration: line-through;
+    }
+
+    .product-grid:hover .price {
+      opacity: 0;
+    }
+
+    .product-grid .buy-now {
+      color: #fff;
+      background-color: #78a206;
+      font-size: 16px;
+      font-weight: 500;
+      text-transform: uppercase;
+      line-height: 40px;
+      width: 140px;
+      height: 40px;
+      border-radius: 50px;
+      opacity: 0;
+      transform: translateX(-50%);
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transition: all .4s ease-out;
+    }
+
+    .product-grid .buy-now:hover {
+      background-color: #2f2f2f;
+    }
+
+    .product-grid:hover .buy-now {
+      opacity: 1;
+      bottom: 8px;
+    }
+
+    @media screen and (max-width:1200px) {
+      .product-grid {
+        margin: 0 0 30px;
+      }
+    }
+  </style>
+
+
+
+  <div class="row">
+
+    {{#each products}}
+    <div class="col-md-3 col-sm-6 mt-5">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#" class="image">
+            <img class="pic-1" src="/public/images/{{this._id}}.jpg">
+          </a>
+          <span class="product-discount-label">-33%</span>
+
+          <ul class="product-links">
+            <li><a href="#" data-tip="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-cart-arrow-down"></i></a></li>
+            <li><a href="/view/{{this._id}}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+          </ul>
+
+        </div>
+        <div class="product-content">
+          <ul class="rating">
+            <li class="fas fa-star"></li>
+            <li class="fas fa-star"></li>
+            <li class="fas fa-star"></li>
+            <li class="far fa-star"></li>
+            <li class="far fa-star"></li>
+          </ul>
+          <h3 class="title">{{this.name}}</h3>
+          <p>{{this.description}}</p>
+          <div class="price"><span>$90.00</span>₹{{this.price}}</div>
+
+          <a class="buy-now" href="#">Buy Now</a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+
+
+
+  </div>
+
+</body>
+
+--}}
+
+
+
+
+
+{{!--
+
+<body>
+  <style>
+    /* CSS styles omitted for brevity */
+  </style>
+  <div>
+    <div class="wrapper d-flex">
+      <!-- Sidebar code omitted for brevity -->
+    </div>
+    <div class="pic">
+      <div class="row">
+        <!-- Add product button triggers the modal -->
+        <button type="button" class="btn btn-success ml-auto mt-3" data-toggle="modal"
+          data-target="#addProductModal">Add products</button>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
+                <label for="">Name:</label>
+                <input type="text" name="name" class="form-control" required>
+
+                <label for="category">Category:</label>
+                <div class="dropdown">
+                  <!-- Dropdown button for category selection -->
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select a category
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                    {{#each category}}
+                    <a class="dropdown-item" href="#">{{this.Cname}}</a>
+                    {{/each}}
+                  </div>
+                </div>
+
+                <label for="">Price:</label>
+                <input type="number" name="price" class="form-control" min="0" step="0.01" required>
+
+                <label for="description">Description:</label>
+                <input type="text" name="description" class="form-control" required>
+
+                <label for="">Image:</label>
+                <input type="file" name="image" class="form-control-file" accept="image/*" required>
+
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table class="table table-dark mt-4" id="productsTable">
+        <!-- Table code omitted for brevity -->
+      </table>
+    </div>
+  </div>
+</body> --}}
+
+
+
+
+
+{{!-- order address page --}}
+
+
+<body>
+  <style>
+    body {
+      background-image: url(/public/project-images/blur.jpg);
+    }
+
+    .bg-image {
+      background-color: #ffde31;
+    }
+
+    .gif-image {
+      width: 100%;
+    }
+
+    .title-style {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: hsl(52, 0%, 98%);
+    }
+
+    .title-quote {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: 400;
+      color: hsl(52, 0%, 98%);
+    }
+  </style>
+
+  <div class="container py-5">
+    <div class="container py-5">
+
+      <h3 class="mb-4" style="
+
+          background: #e3c100;
+          color: black;
+          text-align: center;">Select an Address</h3>
+
+      <!-- Address Cards -->
+      <div class="address-cards">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">John Doe</h5>
+            <p class="card-text">123 Main St</p>
+            <p class="card-text">City, State</p>
+
+            <!-- Select Address Radio Button -->
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="selected-address" id="address1" value="address1"
+                checked>
+              <label class="form-check-label" for="address1">Select this address</label>
+            </div>
+
+            <!-- Edit and Delete Buttons -->
+            <div class="text-end mt-3">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#editModal">Edit</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more address cards here if needed -->
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col">
+        <div class="card my-4 shadow-3">
+          <div class="row g-0">
+            <div class="col-xl-6 d-xl-block bg-image">
+              <img src="/public/project-images/delivery.png" alt="Sample photo" class="img-fluid" />
+              <img src="/public/project-images/delivery.gif" alt="Delivery GIF" class="img-fluid gif-image" />
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-4 text-uppercase">ADD ADDRESS</h3>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input type="text" id="form3Example1m" class="form-control form-control-lg" />
+                      <label class="form-label" name="name" for="form3Example1m">Name</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <input type="phone" id="form3Example1n" class="form-control form-control-lg" />
+                      <label class="form-label" name="phone" for="form3Example1n">Phone</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example8" class="form-control form-control-lg" />
+                  <label class="form-label" name="address" for="form3Example8">Address</label>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <select class="select">
+                      <option value="1">District</option>
+                      <option value="Alappuzha">Alappuzha</option>
+                      <option value="Kollam">Kollam</option>
+                      <option value="Eranakulam">Eranakulam</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <select class="select">
+                      <option value="1">City</option>
+                      <option value="Alappuzha">Alappuza</option>
+                      <option value="Kollam">Kollam</option>
+                      <option value="Eranakulam">Eranakulam</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example3" class="form-control form-control-lg" />
+                  <label class="form-label" name="pincode" for="form3Example3">Pincode</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example2" class="form-control form-control-lg" />
+                  <label class="form-label" name="landmark" for="form3Example2">Landmark</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example4" class="form-control form-control-lg" />
+                  <label class="form-label" name="total-amount" for="form3Example4">Total Amount</label>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label" for="form3Example5">Payment Method</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment-method" id="cash-on-delivery"
+                      value="cash-on-delivery" checked />
+                    <label class="form-check-label" for="cash-on-delivery">
+                      Cash on Delivery
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment-method" id="online-payment"
+                      value="online-payment" />
+                    <label class="form-check-label" for="online-payment">
+                      Online Payment
+                    </label>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-end pt-3">
+                  <button type="button" class="btn btn-success btn-lg ms-2"
+                    style="background-color: hsl(210, 100%, 50%)">
+                    ADD ADDRESS
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+
+
+
+{{!--         placed order orginal
+<body>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      margin-top: 9rem;
+    }
+
+    .column {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .left-column {
+      border-right: 1px solid #ccc;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .form-group.right {
+      text-align: right;
+    }
+
+    .total-label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-group.right .total-amount {
+      font-size: 18px;
+    }
+
+    .form-group.right .delivery-fee {
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .form-group.right .payment-method {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-group.right button[type="submit"] {
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .form-group.right button[type="submit"]:hover {
+      background: #555;
+    }
+
+    input[type=radio] {
+      width: 20px;
+      height: 20px;
+    }
+
+    label.radio-inline {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkout {
+      border: 1px solid;
+      border-radius: 3px;
+      padding: 30px;
+    }
+  </style>
+  <div class="container" style="    box-shadow: 6px 6px 6px #595858;">
+
+    <form action="" id="checkout-form">
+      <div class="column left-column">
+        <h1>Enter Delivery Address</h1>
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" required>
+        </div>
+        {{!-- <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required>
+        </div> --}}
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" name="phone" id="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" name="address" id="address" required>
+        </div>
+        {{!-- <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" name="city" id="city" required>
+        </div> --}}
+        {{!-- <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" name="state" id="state" required>
+        </div> --}}
+        <div class="form-group">
+          <label for="zip">Pin Code</label>
+          <input type="text" name="pincode" id="pincode" required>
+        </div>
+        <input type="text" name="userId" id="" value="{{users._id}}" hidden>
+
+      </div>
+
+      <div class="column ">
+        <div class="form-group right">
+          <label class="total-label">Total Amount</label>
+          <div class="total-amount">₹{{total}}</div>
+          <div class="delivery-fee">(Free Delivery)</div>
+          {{!-- <label class="payment-method">Payment Method</label> --}}
+          {{!-- <select name="payment-method" id="payment-method">
+            <option value="cash-on-delivery">Cash on Delivery</option>
+            <option value="credit-card">Credit Card</option>
+            <option value="debit-card">Debit Card</option>
+          </select> --}}
+          <div class="payment">
+            <b>payment method</b>
+            <label class="radio-inline">
+              <input type="radio" name="payment-method" value="COD" checked>COD
+            </label>
+            <label class="radio-inline mt-2">
+              <input type="radio" name="payment-method" value="ONLINE">Online payment
+            </label>
+          </div>
+
+          <button class="btn btn-primary float-right" type="submit">Checkout</button>
+
+        </div>
+
+      </div>
+    </form>
+    <div class="d-flex ">
+      <img src="/public/project-images/delivery-cartoon-illustration-png.webp" alt="" style="    width: 12rem;
+    height: 12rem;">
+    </div>
+  </div>
+</body>
+
+<script>
+  $('#checkout-form').submit((e) => {
+    e.preventDefault()
+    $.ajax({
+      url: '/place-order',
+      method: 'post',
+      data: $('#checkout-form').serialize(),
+      success: (response) => {
+        confirm('are you sure to confirm this order ?')
+        if (response.status) {
+          location.href = '/order-success'
+        }
+      }
+    })
+  })
+</script> 
+
+ --}}
+
+
+
+ <!-- Modal -->
+{{!-- <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addProductForm" enctype="multipart/form-data">
+                    <label for="">Name:</label>
+                    <input type="text" name="name" class="form-control" required>
+
+                    <div class="dropdown">
+                        <label for="category">Category:</label>
+                        <select name="category" class="form-control" required>
+                            <option value="">Select a category</option>
+                            {{#each category}}
+                            <option>{{this.Cname}}</option>
+                            {{/each}}
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+
+                    <label for="">Price:</label>
+                    <input type="number" name="price" class="form-control" min="0" step="0.01" required>
+
+                    <label for="description">Description:</label>
+                    <input type="text" name="description" class="form-control" required>
+
+                    <label for="image">Image:</label>
+                    <input id="imageInput" type="file" name="image" class="form-control-file" accept="image/*"
+                        required>
+                    <div id="image-container">
+                        <img id="image-preview" src="" alt="Preview Image">
+                    </div>
+                    <button id="submitBtn" type="submit" class="btn btn-primary mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+<!-- Your JavaScript code -->
+{{!-- <script>
+    // Get the necessary elements
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('image-preview');
+    const imageContainer = document.getElementById('image-container');
+    const addProductForm = document.getElementById('addProductForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Initialize the cropper instance
+    let cropper;
+
+    // Handle the image selection
+    imageInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+
+        // Check if a file is selected
+        if (file) {
+            // Create a FileReader to read the image file
+            const reader = new FileReader();
+
+            // Load the image into the preview element
+            reader.onload = () => {
+                imagePreview.src = reader.result;
+
+                // Initialize the cropper
+                cropper = new Cropper(imagePreview, {
+                    aspectRatio: 1, // Set the desired aspect ratio for cropping (e.g., 1:1 for a square)
+                    viewMode: 2, // Set the desired view mode (0: 'free', 1: 'crop', 2: 'preview', 3: 'rotate')
+                    autoCropArea: 0.8, // Set the initial crop area size as a percentage (e.g., 0.8 for 80% of the image)
+                    // Add any other desired options here
+                });
+            };
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(file);
+
+            // Show the image container
+            imageContainer.style.display = 'block';
+        }
+    });
+
+    // Handle form submission
+    addProductForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        // Get the cropped image data
+        const croppedImageData = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+
+        // Create a new hidden input field to store the cropped image data
+        const croppedImageInput = document.createElement('input');
+        croppedImageInput.type = 'hidden';
+        croppedImageInput.name = 'croppedImage';
+        croppedImageInput.value = croppedImageData;
+
+        // Append the hidden input field to the form
+        addProductForm.appendChild(croppedImageInput);
+
+        // Disable the submit button to prevent multiple submissions
+        submitBtn.disabled = true;
+
+        // Submit the form
+        addProductForm.submit();
+    });
+</script> --}}
+
+
+
+
+{{!-- 
+
+<html lang="en">
+<head>
+   
+    <link rel="stylesheet" href="/public/stylesheets/view-page.css">
+    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> --}}
+
+
+</head>
+<body>
+    <style>
+        #productImageContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+#productImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+    </style>
+ 
+   
+
+    <div class="flex-box" style="background-color: #fff;
+    margin-top: 10rem; box-shadow: 6px 6px 6px #6c6c6c;">
+        
+        <div class="left">
+            <div class="big-img">
+                <img id="productImage"  src="/{{product.photos.[0].fileName}}" >
+            </div>
+            <div class="images">
+                <div class="small-img">
+                    <img  src="/{{product.photos.[1].fileName}}" onclick="showImg(this.src)">
+                </div>
+                 <div class="small-img">
+                    <img  src="/{{product.photos.[2].fileName}}" onclick="showImg(this.src)">
+                </div>
+                             
+                <div class="small-img">
+                    <img  src="/{{product.photos.[3].fileName}}"  onclick="showImg(this.src)">
+                </div>
+                <div class="small-img">
+                    <img  src="/{{product.photos.[0].fileName}}"  onclick="showImg(this.src)">
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            
+
+            <div class="pname">{{product.name}}</div>
+            <div class="ratings">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <div class="price">₹{{product.price}}</div>
+             <div class="description">{{product.description}}</div>
+            
+            <div class="quantity">
+                <p>Quantity :</p>
+                <input type="number" min="1" max="100" value="1">
+            </div>
+            <div class="btn-box">
+                <button onclick="addToCart('{{product._id}}')" class="cart-btn">Add to Cart</button>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </div>
+       
+    </div>
+
+
+    <script>
+        let bigImg = document.querySelector('.big-img img');
+        function showImg(pic){
+            bigImg.src = pic;
+        }
+    </script>
+    <script>
+        const productImage = document.getElementById('productImage');
+
+productImage.addEventListener('mouseenter', () => {
+  productImage.style.transform = 'scale(1.5)';
+});
+
+productImage.addEventListener('mouseleave', () => {
+  productImage.style.transform = 'scale(1)';
+});
+    </script>
+</body>
+</html>  --}}
+
+

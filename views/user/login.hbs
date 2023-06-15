@@ -1,0 +1,127 @@
+<body>
+    <style>
+        body {
+            background-color: #EEE502;
+            background-image: url(/public/project-images/background\ 2.png);
+        }
+                .outer {
+                opacity: 0;
+                animation: fadeIn 0.5s ease-in-out forwards;
+                }
+
+                @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+                }
+        .form{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width:25rem;
+            
+        }
+        h1{
+            margin-bottom:2rem;
+        }
+        input{
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin-bottom: 2rem;
+            width:21rem;
+            height:3rem;
+            border:none;
+            border-radius: 12px;
+        }
+         span{
+             
+            {{!-- right: 66px; --}}
+            cursor: pointer;    
+             {{!-- top: 326px; --}}
+                 margin-left: -28px;
+        }
+    </style>
+    <div class="outer" style="position: absolute;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 437px;
+            height: 578px;
+            right: 1%;
+            top: calc(59% - 786px/2 - -15px);
+            background: #dacdcd52;
+            box-shadow: 0px 10px 4px 3px rgba(0, 0, 0, 0.25);
+            border-radius: 66px;">
+        <div class="form" style="
+            height:32rem;">
+            <h1>Sign in</h1>
+            <form action="/login" method="post">
+                {{#if loginErr}}
+                <p style="color: red;">Invalid email or Password</p>
+                {{/if}}
+            
+                <input type="text" id="email" name="email" placeholder="Enter  your email"required>
+                <div>
+                <input type="password" id="password" name="password" placeholder="Password" style="margin-left: -5px;" required>
+                <span >
+                    <i class="fa fa-eye" aria-hidden="true" id="eye" onclick="toggle()"></i>
+                </span>
+                 </div>
+                <input type="submit" value="signup" style="width:10rem; margin-bottom:5px;  background: #5e5ebac2;">
+                <a href="/forgot-password">Forgotten password ?</a>
+               <div class="already sign up"> 
+                Create a new account ? <a href="/signup">sign up</a>
+            </div>
+            </form>
+            
+        </div>
+    </div>
+  <script> 
+    var state=false;
+    function toggle(){
+        if(state){
+            document.getElementById("password").setAttribute("type","password");
+            document.getElementById("eye").style.color='#7a797e';
+            state=false
+        }else{
+            document.getElementById("password").setAttribute("type","text");
+            document.getElementById("eye").style.color="#5887ef";
+            state=true;
+        }
+    }
+
+   
+    var pResetValue = {{#if pReset}}true{{else}}false{{/if}};
+    if (pResetValue) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Password Reset',
+        text: 'Your password has been reset successfully!',
+      });
+    }
+  
+   var register={{register}}
+   if(register){
+Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Account registered',
+  showConfirmButton: false,
+  timer: 1500
+})
+   }
+</script>
+
+
+    
+</body>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bake Corner</title>
+     <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {{!-- layout --}}
+
+{{!-- favicon --}}
+   <link rel="icon" href="/public/project-images/Bake icon .png" type="image/x-icon">
+  <link rel="shortcut icon" href="/public/project-images/Bake icon .png" type="image/x-icon">
+    
+
+{{!-- add-address--}}
+<link rel="stylesheet" href="/public/stylesheets/add-address.css">
+<link rel="stylesheet" href="/public/stylesheets/add-address2.css">
+<link rel="stylesheet" href="/public/stylesheets/add-address3.css">
+<link rel="stylesheet" href="/public/stylesheets/add-address4.css">
+
+
+  
+
+
+{{!-- template stylesheet view page--}}
+<link href="/public/stylesheets/style.css" rel="stylesheet">
+ <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/public/lib/animate/animate.css" rel="stylesheet">
+    <link href="/public/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+{{!-- --------------------- --}}
+
+
+
+
+
+
+
+  <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+ 
+
+{{!-- cart --}}
+ <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="/public/stylesheets/cart.css">
+    <script src="/public/javascripts/cart.js"></script>
+
+    {{!-- ------ --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/public/javascripts/script.js"></script>
+
+
+    {{!-- sweet alert --}}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
+    {{!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
+  {{!-- font --}}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+
+  {{!-- crop --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+{{!-- <script src="https://cdn.jsdelivr.net/npm/cropperjs"></script> --}}
+
+{{!-- dashboard --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    {{!-- graph --}}
+    	<script src='https://cdn.plot.ly/plotly-2.20.0.min.js'></script>
+      
+      {{!-- open-product --}}
+     <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
+</head>
+<body>
+ 
+    
+    {{#if admin}}
+    {{>admin-header}}
+    {{else if user}}
+    {{>user-header}}
+    {{else}}
+
+    {{/if}}
+ 
+    {{{body}}}
+        {{!-- graph --}}
+      
+      <script src="dist/bundle.js"></script>
+
+      
+
+    
+    {{!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+    <script src="/public/lib/wow/wow.min.js"></script>
+    <script src="/public/lib/wow/wow.js"></script>
+    <script src="/public/lib/waypoints/waypoints.min.js"></script>
+    <script src="/public/lib/owlcarousel/owl.carousel.min.js"></script>
+
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {{!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script> --}}
+    {{!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    {{!-- elevete zoom --}}
+   
+</body>
+</html>

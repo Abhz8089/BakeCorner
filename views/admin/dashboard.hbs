@@ -1,0 +1,455 @@
+<body>
+
+    <link rel="stylesheet" href="/public/assets/css/styles.css">
+
+    <style>
+        body {
+            background-color: #6d6161;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            font-family: arial;
+
+        }
+
+        body {
+            background: #eee;
+        }
+
+
+
+        .sidebar {
+            position: relative;
+            width: 250px;
+            height: 43rem;
+            background: #3b3b3b;
+            padding: 10px 0;
+
+        }
+
+        .wrapper .sidebar ul li {
+            padding: 15px;
+        }
+
+        .wrapper .sidebar ul li a {
+            color: #bdb8d7;
+            display: block;
+        }
+
+        .wrapper .sidebar ul li a .fas {
+            width: 25px !important;
+        }
+
+        .wrapper .sidebar ul li a .far {
+            width: 25px !important;
+        }
+
+        .wrapper .sidebar ul li:hover {
+            background: #311B92;
+        }
+
+        .wrapper .sidebar ul li a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .myproject {
+            margin-top: 25px;
+            color: #ffffffa8;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .userProfile {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            display: flex;
+
+        }
+
+        .userProfile a {
+            width: 20px;
+            background: #4527A0;
+            color: #bdb8d7;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+
+
+
+        .innerSide {
+
+            margin-top: 4rem;
+            border-radius: 2rem;
+            background-color: white;
+            box-shadow: 13px;
+
+
+        }
+
+        .pic {
+            margin-left: 19rem;
+            margin-right: 2rem;
+        }
+
+        .card {
+            align-items: center;
+        }
+    </style>
+    <div>
+
+
+
+        <div class="wrapper d-flex">
+            <div class="sidebar">
+                <div class="innerSide">
+                    <ul>
+
+                        <li><a style="color: black;" href="#"><i
+                                    class="fas fa-arrow-right"></i><strong>Dashboard</strong></a></li>
+                        <li><a href="/admin"><i class="fas"></i>Products</a></li>
+                        <li><a href="#"><i class="fas"></i>Category</a></li>
+                        <li><a href="#"><i class="fas"></i>Orders</a></li>
+                        <li><a href="#"><i class="fas"></i>Customers</a></li>
+                        <li><a href="#"><i class="fas"></i>Coupons</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+
+        </div>
+        {{!-- <div class="pic"> --}}
+
+
+            <section class="main">
+
+                <div class="main--container">
+             
+                    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">7
+                                    day </a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">a
+                                    week</a>
+                            </li>
+                            <li class="nav-item me-0">
+                                <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">a
+                                    year</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="tab-content">
+                        <div class="card card-0" style="background-color: #3b3b3b;">
+                            <div class="card--title">
+
+                            </div>
+
+                            <h5 class="more" style="color: white;">Sales Report</h5>
+                            <form action="download" method="post" >
+                            <button id="downloadButton" >Download</button>
+                            </form>
+
+                        </div>
+                        <div class="cards tab-pane fade show active" id="tab-1">
+                            <div class="card card-1">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-shopping-bag-2-line"></i></span>
+                                    <span>Sales</span>
+                                </div>
+                                <h3 class="card--value">₹{{totalPriceSevenDay}} <i
+                                        class="ri-arrow-up-circle-fill up"></i></h3>
+                                <h5 class="more">₹1000 more than usual</h5>
+                                <div class="chart">
+                                    <canvas id="sales"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-2">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-gift-line"></i></span>
+                                    <span>Orders</span>
+                                </div>
+                                <h3 class="card--value">{{totalOrderSevenDay}}<i class="ri-arrow-down-circle-fill down"></i></h3>
+                                <h5 class="less">1 less than usual</h5>
+                                <div class="chart">
+                                    <canvas id="orders"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-3">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-handbag-line"></i></span>
+                                    <span>Products</span>
+                                </div>
+                                <h3 class="card--value">{{totalProductQuantitySevenDay}} <i class="ri-arrow-up-circle-fill up"></i></h3>
+                                <h5 class="more">2 more than usual</h5>
+                                <div class="chart">
+                                    <canvas id="products"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-4">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-user-line"></i></span>
+                                    <span>Customers</span>
+                                </div>
+                                <h3 class="card--value">{{userInLastSevenDay}} <i class="ri-arrow-down-circle-fill down"></i></h3>
+                                <h5 class="less">1 less than usual</h5>
+                                <div class="chart">
+                                    <canvas id="customers"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cards tab-pane fade" id="tab-2">
+                            <div class="card card-1">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-shopping-bag-2-line"></i></span>
+                                    <span>Sales</span>
+                                </div>
+                                <h3 class="card--value">₹{{totalPriceAMonth}}<i class="ri-arrow-up-circle-fill up"></i>
+                                </h3>
+                                <h5 class="more">1000 more than usual</h5>
+                                <div class="chart">
+                                    <canvas id="sales"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-2">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-gift-line"></i></span>
+                                    <span>Orders</span>
+                                </div>
+                                <h3 class="card--value">{{totalOrderAMonth}}<i class="ri-arrow-down-circle-fill down"></i></h3>
+                                <h5 class="less">2 less than usual</h5>
+                                <div class="chart">
+                                    <canvas id="orders"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-3">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-handbag-line"></i></span>
+                                    <span>Products</span>
+                                </div>
+                                <h3 class="card--value">{{totallProductQuantityAMonth}} <i class="ri-arrow-up-circle-fill up"></i></h3>
+                                <h5 class="more">3 more than usual</h5>
+                                <div class="chart">
+                                    <canvas id="products"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-4">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-user-line"></i></span>
+                                    <span>Customers</span>
+                                </div>
+                                <h3 class="card--value">{{userInLastMonth}} <i class="ri-arrow-down-circle-fill down"></i></h3>
+                                <h5 class="less">2 less than usual</h5>
+                                <div class="chart">
+                                    <canvas id="customers"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="cards tab-pane fade" id="tab-3">
+                            <div class="card card-1">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-shopping-bag-2-line"></i></span>
+                                    <span>Sales</span>
+                                </div>
+                                <h3 class="card--value">₹{{totalPriceAyear}}<i class="ri-arrow-up-circle-fill up"></i>
+                                </h3>
+                                <h5 class="more">1000 more than usual</h5>
+                                <div class="chart">
+                                    <canvas id="sales"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-2">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-gift-line"></i></span>
+                                    <span>Orders</span>
+                                </div>
+                                <h3 class="card--value">{{totalOrderAyear}}<i class="ri-arrow-down-circle-fill down"></i></h3>
+                                <h5 class="less">3 less than usual</h5>
+                                <div class="chart">
+                                    <canvas id="orders"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-3">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-handbag-line"></i></span>
+                                    <span>Products</span>
+                                </div>
+                                <h3 class="card--value">{{totallProductQuantityAyear}} <i class="ri-arrow-up-circle-fill up"></i></h3>
+                                <h5 class="more">4 more than usual</h5>
+                                <div class="chart">
+                                    <canvas id="products"></canvas>
+                                </div>
+                            </div>
+                            <div class="card card-4">
+                                <div class="card--title">
+                                    <span class="card--icon icon"><i class="ri-user-line"></i></span>
+                                    <span>Customers</span>
+                                </div>
+                                <h3 class="card--value">{{userInLastYear}}<i class="ri-arrow-down-circle-fill down"></i></h3>
+                                <h5 class="less">3 less than usual</h5>
+                                <div class="chart">
+                                    <canvas id="customers"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="target-vs-sales--container" >
+                        <div class="section--title" >
+                            <h3 class="title">Sales difference</h3>
+                            <div class="sales--value" >
+                                <div class="target" >
+                                    <i class="ri-checkbox-blank-circle-fill circle"></i>
+                                    Target <span>&nbsp; sales</span>
+                                </div>
+                                <div class="current">
+                                    <i class="ri-checkbox-blank-circle-fill circle"></i>
+                                    Current <span>&nbsp; sales</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="target--vs--sales" id="myDiv" data-product-sell="{{productSell}}">
+                            
+                        </div>
+                    </div>
+
+
+
+                    <div class="table">
+                        <div class="section--title">
+                            <h3 class="title">Top products</h3>
+                            <div></div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product name</th>
+                                    <th>Order ID</th>
+                                    <th>Price</th>
+                                    <th>Sold</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each topSellProduct}}
+                                <tr>
+                                    <td>{{productDetails.name}}</td>
+                                    <td>{{productId}}</td>
+                                    <td>{{productDetails.price}}</td>
+                                    <td>{{count}}</td>                                                                       
+                                </tr>
+                                {{/each}}
+                          
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <div class="cards">
+                        <div class="card card-5" >
+                            <div class="card--title">
+                                <span class="card--icon icon"><i class="ri-shopping-bag-2-line"></i></span>
+                                <span>Total Sales</span>
+                            </div>
+                            <h3 class="card--value">₹{{totalAmount}}</h3>
+                            
+                            <div class="chart">
+                                <canvas id="sales"></canvas>
+                            </div>
+                        </div>
+                        <div class="card card-6">
+                            <div class="card--title">
+                                <span class="card--icon icon"><i class="ri-gift-line"></i></span>
+                                <span>Total Orders</span>
+                            </div>
+                            <h3 class="card--value">{{totalOrder}}</h3>
+                            
+                            <div class="chart">
+                                <canvas id="orders"></canvas>
+                            </div>
+                        </div>
+                        <div class="card card-7">
+                            <div class="card--title">
+                                <span class="card--icon icon"><i class="ri-handbag-line"></i></span>
+                                <span>Total Products</span>
+                            </div>
+                            <h3 class="card--value">{{totalProduct}}</h3>
+                            
+                            <div class="chart">
+                                <canvas id="products"></canvas>
+                            </div>
+                        </div>
+                        <div class="card card-8">
+                            <div class="card--title">
+                                <span class="card--icon icon"><i class="ri-user-line"></i></span>
+                                <span>Total Customers</span>
+                            </div>
+                            <h3 class="card--value">{{totalCustomer}}</h3>
+                            
+                            <div class="chart">
+                                <canvas id="customers"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+      
+
+    </div>
+    
+  <script>
+  var productSell = document.getElementById('myDiv').getAttribute('data-product-sell');
+  var productSelled = JSON.parse(productSell)
+ 
+
+const u = productSelled.map((data) => {
+  const monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  const month = monthNames[data._id - 1]; 
+  return month;
+});
+
+const a = productSelled.map((data) => data.totalAmount);
+
+var trace1 = {
+  x: u,
+  y: a,
+  type: 'scatter',
+  borderColor: 'rgb(59, 197, 154)'
+};
+
+var data = [trace1];
+
+var layout = {
+  title: 'Scroll and Zoom',
+  showlegend: false
+};
+
+Plotly.newPlot('myDiv', data, layout, { scrollZoom: true });
+
+  </script>
+
+
+
+</body>
+
+
+

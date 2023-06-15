@@ -1,0 +1,239 @@
+<body>
+    <style>
+        body {
+            background-color: #EEE502;
+            background-image: url(/public/project-images/background\ 2.png);
+        }
+                    .outer {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+            }
+
+            @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+            }
+        .form{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width:25rem;
+            
+        }
+        h1{
+            margin-bottom:2rem;
+        }
+        input{
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin-bottom: 2rem;
+            width:21rem;
+            height:3rem;
+            border:none;
+            border-radius: 12px;
+        }
+        span{
+             
+            {{!-- right: 66px; --}}
+            cursor: pointer;    
+             {{!-- top: 326px; --}}
+                 margin-left: -28px;
+        }
+        .fa{
+            font-size:20px;
+            coolor: #7a797e;
+        }
+        .password_required{
+            display: none;
+        }
+        .password_required ul{
+            padding:0;
+            margin:0 0 15px;
+            list-style:none;
+            
+        }
+        .password_required ul li{
+            margin-bottom:8px;
+            color:red;
+            font-weight:700;
+        }
+        .password_required ul li.active{
+            color:#02af02;
+        }
+        .input_submit{
+            cursor: pointer;
+            pointer-events: none;
+        }
+        .input_submit.active{
+            pointer-events: auto;
+        }
+        .valid{
+            border:1px solid green
+
+        }
+        .invalid{
+            border:1px solid red
+        }
+   
+    
+    </style>
+    <div class="outer" style="position: absolute;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 437px;
+            height: 578px;
+           right: 1%;
+            top: calc(59% - 786px/2 - -15px);
+            background: #dacdcd52;
+            box-shadow: 0px 10px 4px 3px rgba(0, 0, 0, 0.25);
+            border-radius: 66px;">
+        <div class="form" style="
+            height:32rem;">
+            <h1>Sign Up</h1>
+            <form accept="/signup" method="post">
+               {{#if loginErr}}
+                <p style="color: red;">That email is taken.Try another.</p>
+                {{/if}}
+            
+                <input type="text" id="name" name="name" placeholder="Enter  your name" required>
+                <input type="text" id="email" name="email" placeholder="Enter  your email"required>
+                 {{!-- <div class="wrapper" style="margin-left: 31px;"> --}}
+                <div>
+                <input type="password" id="password" name="password" placeholder="Password" required> 
+                
+                <span >
+                    <i class="fa fa-eye" aria-hidden="true" id="eye" onclick="toggle()"></i>
+                </span>
+                </div>
+                <div>
+                 <input type="password" id="confirm-password" name="cpassword" placeholder="Confirm Password" required> 
+                 <span >
+                    <i class="fa fa-eye" aria-hidden="true" id="eyec" onclick="toggled()"></i>
+                </span>
+                </div>
+
+                </div>
+                   <div class="password_required">
+                    <ul>
+                        <li class="special"><span></span>Atleast 8 Characters</li>
+                    </ul>
+                </div>
+                <input class="input_submit active" type="submit"  id="submit-button" value="signup" style="width:10rem; margin-bottom:5px; background: #5e5ebac2;">
+                
+               <div class="already sign up"> 
+                Already have an account ? <a href="/login">login</a>
+
+            </div>
+            </form>
+            
+        </div>
+    </div>
+</body>
+       
+   
+      <script>
+    var state=false;
+    function toggle(){
+        if(state){
+            document.getElementById("password").setAttribute("type","password");
+            document.getElementById("eye").style.color='#7a797e';
+            state=false
+        }else{
+            document.getElementById("password").setAttribute("type","text");
+            document.getElementById("eye").style.color="#5887ef";
+            state=true;
+        }
+    }
+  
+</script>
+<script>
+      var st=false;
+    function toggled(){
+        if(st){
+            document.getElementById("confirm-password").setAttribute("type","password");
+            document.getElementById("eyec").style.color='#7a797e';
+            st=false
+        }else{
+            document.getElementById("confirm-password").setAttribute("type","text");
+            document.getElementById("eyec").style.color="#5887ef";
+            st=true;
+        }
+    }
+</script>
+<script>
+
+    $('#password').on('focus',function(){
+        $('.password_required').slideDown();
+    })
+    $('#password').on('blur',function(){
+        $('.password_required').slideUp();
+    })
+    $('#password').on('keyup',function(){
+        passValue = $(this).val();
+
+        if(passValue.length==8 || passValue.length>8){
+            $('.special').addClass('active');
+        }else{
+            $('.special').removeClass('active');
+        } 
+        $('.password_required ul li').each(function(index,el){
+            if(!$(this).hasClass('active')){
+                $('.input_submit').removeClass('active')
+            }else{
+                $('.input_submit').addClass('active')
+            }
+        })
+    })
+</script>
+<script>
+    var password=$("#password");
+    var confirmPassword=$("#confirm-password")
+    confirmPassword.keyup(function(){
+        if(confirmPassword.val()==password.val()){
+            confirmPassword.removeClass('invalid').addClass('valid')
+            if(password.val()&& confirmPassword.hasClass("valid")){
+                $("#submit-button").prop("disabled",false)
+            }else{
+                $("#submit-button").prop("disabled",true)
+            }
+        }else{
+            confirmPassword.removeClass("valid").addClass("invalid")
+            $("#submit-button").prop("disabled",true);
+        }
+    })
+
+
+var emailNotExist = {{#if emailNotExist}}true{{else}}false{{/if}};
+
+if (emailNotExist) {
+  Swal.fire({
+    icon: 'exclamation-circle',
+    title: 'No Access',
+    text: 'Your email is not registered Please sign up.',
+  });
+}
+
+var reg={{userReg}}
+if(reg){
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'wrong OTP!',
+  footer: '<a href="">Please check carefully</a>'
+})
+}
+
+
+</script>

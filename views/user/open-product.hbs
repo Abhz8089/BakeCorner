@@ -1,0 +1,243 @@
+
+
+
+
+<body>
+  <style>
+    * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #d5f03c 0%, #f1f1f1 100%);
+  }
+  
+  .container {
+    max-width: 75%;
+    margin: auto;
+    height: 80vh;
+    margin-top: 5%;
+   background: linear-gradient(135deg, #59e36e 0%, #ee9c9c 100%);
+    box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .left, .right {
+    width: 50%;
+    padding: 30px;
+  }
+  
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flex1 {
+    display: flex;
+  }
+  
+  .main_image {
+    width: auto;
+    height: auto;
+  }
+  
+  .option img {
+    width: 75px;
+    height: 75px;
+    padding: 10px;
+  }
+  
+  .right {
+    padding: 50px 100px 50px 50px;
+  }
+  
+  h3 {
+    color: #af827d;
+    margin: 20px 0 20px 0;
+    font-size: 25px;
+  }
+  
+  h5,
+  p,
+  small {
+    color: #837D7C;
+  }
+  
+  h4 {
+    color: red;
+  }
+  
+  p {
+    margin: 20px 0 50px 0;
+    line-height: 25px;
+  }
+  
+  h5 {
+    font-size: 15px;
+  }
+  
+  label,
+  .add span,
+  .color span {
+    width: 25px;
+    height: 25px;
+    background: #000;
+    border-radius: 50%;
+    margin: 20px 10px 20px 0;
+  }
+  
+
+  
+  .add label,
+  .add span {
+    background: none;
+    border: 1px solid #C1908B;
+    color: #C1908B;
+    text-align: center;
+    line-height: 25px;
+  }
+  
+  .add label {
+    padding: 10px 30px 0 20px;
+    border-radius: 50px;
+    line-height: 0;
+  }
+  
+  button.carted {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #050404;
+    color: white;
+    
+    border-radius: 30px;
+  }
+  
+  @media only screen and (max-width:768px) {
+    .container {
+      max-width: 90%;
+      margin: auto;
+      height: auto;
+    }
+  
+    .left, .right {
+      width: 100%;
+    }
+  
+    .container {
+      flex-direction: column;
+    }
+  }
+  
+  @media only screen and (max-width:511px) {
+    .container {
+      max-width: 100%;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .left, .right {
+      padding: 0;
+    }
+  
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .option {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  </style>
+  <section>
+    <div class="container flex">
+      <div class="left">
+        <div class="main_image" id="img-container">
+          <img src="/{{product.photos.[0].fileName}}"  class="slide" style="width: 100%;"  data-zoom-image="/{{product.photos.[0].fileName}}">
+        </div>
+        <div class="option flex">
+          <img src="/{{product.photos.[0].fileName}}" onclick="img(this.src)">
+          <img src="/{{product.photos.[1].fileName}}"  onclick="img(this.src)">
+          <img src="/{{product.photos.[2].fileName}}"  onclick="img(this.src)">
+          <img src="/{{product.photos.[3].fileName}}"  onclick="img(this.src)">
+          <img src="/{{product.photos.[1].fileName}}"  onclick="img(this.src)">
+          <img src="/{{product.photos.[3].fileName}}"  onclick="img(this.src)">
+        </div>
+      </div>
+      <div class="right">
+        <h2><b>{{product.name}}</b></h2>
+        <h4> <small>₹</small>{{product.price}} </h4>
+        <p><i>{{product.description}}</i> </p>
+        
+     
+          {{#if users}}
+         <button onclick="addToCart('{{product._id}}')"  class="carted">Add to Bag</button>
+          {{else}}
+          <a href="/login" class="btn btn-dark" style="   width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #050404;
+    color: white;
+    
+    border-radius: 30px;">Add to Bag</a>
+          {{/if}}
+       
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    function img(anything) {
+      document.querySelector('.slide').src = anything;
+    }
+
+    function change(change) {
+      const line = document.querySelector('.home');
+      line.style.background = change;
+    }
+    
+    
+  </script>
+  <script>
+    function img(anything) {
+      var slide = document.querySelector('.slide');
+      slide.src = anything;
+      slide.dataset.zoomImage = anything;
+    }
+
+    function change(change) {
+      var line = document.querySelector('.home');
+      line.style.background = change;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var options = {
+        width: 500,
+        height: 450,
+        zoomWidth: 400,
+        offset: { vertical: 20, horizontal: 15 }
+      };
+      new ImageZoom(document.getElementById("img-container"), options);
+
+      var optionImages = document.querySelectorAll('.option img');
+      optionImages.forEach(function(image) {
+        image.addEventListener('click', function() {
+          var mainImage = document.querySelector('.slide');
+          mainImage.src = this.src;
+          mainImage.dataset.zoomImage = this.dataset.zoomImage;
+          new ImageZoom(document.getElementById("img-container"), options);
+        });
+      });
+    });
+  </script>
+
+
+</body>
+

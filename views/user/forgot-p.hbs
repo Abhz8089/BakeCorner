@@ -1,0 +1,291 @@
+
+
+
+<body>z
+    <style>
+        body {
+            background-color: #EEE502;
+            background-image: url(/public/project-images/background\ 2.png);
+        }
+                    .outer {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+            }
+
+            @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+            }
+        .form{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width:25rem;
+            
+        }
+        h1{
+            margin-bottom:2rem;
+        }
+        input{
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            margin-bottom: 2rem;
+            width:21rem;
+            height:3rem;
+            border:none;
+            border-radius: 12px;
+        }
+        span{
+             
+            {{!-- right: 66px; --}}
+            cursor: pointer;    
+             {{!-- top: 326px; --}}
+                 margin-left: -28px;
+        }
+        .fa{
+            font-size:20px;
+            coolor: #7a797e;
+        }
+        .password_required{
+            display: none;
+        }
+        .password_required ul{
+            padding:0;
+            margin:0 0 15px;
+            list-style:none;
+            
+        }
+        .password_required ul li{
+            margin-bottom:8px;
+            color:red;
+            font-weight:700;
+        }
+        .password_required ul li.active{
+            color:#02af02;
+        }
+        .input_submit{
+            cursor: pointer;
+            pointer-events: none;
+        }
+        .input_submit.active{
+            pointer-events: auto;
+        }
+        .valid{
+            border:1px solid green
+
+        }
+        .invalid{
+            border:1px solid red
+        }
+                .timer {
+                margin-bottom: 2rem;
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+    </style>
+    <div class="outer" style="position: absolute;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 437px;
+            height: 578px;
+            right: 1%;
+            top: calc(59% - 786px/2 - -15px);
+            background: #dacdcd52;
+            box-shadow: 0px 10px 4px 3px rgba(0, 0, 0, 0.25);
+            border-radius: 66px;">
+            {{#if userF}}
+        <div class="form" style="
+            height:32rem;">
+            <h1>Change Password</h1>
+            <form action="/Enter-Otp" method="post">
+                          
+                <input type="text" id="email" name="email" placeholder="Enter  your email"required>
+                 {{!-- <div class="wrapper" style="margin-left: 31px;"> --}}
+                <div>
+                <input type="password" id="password" name="password" placeholder=" Enter New Password" required> 
+                
+                <span >
+                    <i class="fa fa-eye" aria-hidden="true" id="eye" onclick="toggle()"></i>
+                </span>
+                </div>
+                <div>
+                 <input type="password" id="confirm-password" name="Cpassword" placeholder="Confirm Password" required> 
+                 <span >
+                    <i class="fa fa-eye" aria-hidden="true" id="eyec" onclick="toggled()"></i>
+                </span>
+                </div>
+
+                </div>
+                   <div class="password_required">
+                    <ul>
+                        <li class="special"><span></span>Atleast 8 Characters</li>
+                    </ul>
+                </div>
+                <input class="input_submit active" type="submit"  id="submit-button" value="CONFIRM" style="width:10rem; margin-bottom:5px; background: #5e5ebac2;">
+                
+               
+
+            </form>
+            
+        </div>
+     {{else}}
+
+
+            <div class="form" style="
+            height:32rem;">
+            <h1>Enter OTP</h1>
+          
+          
+              
+   
+    <form method="post" action="/reset-password">
+      <div>
+        <label for="name" style="margin-left: 22%;">We've sent an OTP to your Email.</label>
+        <input type="text" style="margin-left: 2rem;" name="otp" required>
+        <input type="text" name="OrginalOtp" value="{{otp}}" hidden>
+        
+        <input type="text" name="userEmail" value="{{userDetails.email}}" hidden>
+        <input type="text" name="userPassword" value="{{userDetails.password}}" hidden>
+        <input type="text" name="userCpassword" value="{{userDetails.Cpassword}}" hidden>
+      </div>
+      
+      
+      {{!-- <button type="submit" style="background-color: rgb(232 153 5);
+    border-radius: 14px;
+    border: none;" ></button> --}}
+    <input type="submit" class="btn btn-success" value="verify Otp">     
+    </form>
+         <form method="POST" action="/F-resend">
+           <input type="text" name="userEmail" value="{{userDetails.email}}" hidden>
+        <input type="text" name="userPassword" value="{{userDetails.password}}" hidden>
+        <input type="text" name="userCpassword" value="{{userDetails.Cpassword}}" hidden>
+        
+            <button class="btn btn-dark" type="submit" id="resendButton" disabled>resend otp</button>
+             
+            <div class="timer">01:00</div>
+            
+        </div>
+      {{/if}}
+    </div>
+    </div>
+</body>
+       
+   
+      <script>
+    var state=false;
+    function toggle(){
+        if(state){
+            document.getElementById("password").setAttribute("type","password");
+            document.getElementById("eye").style.color='#7a797e';
+            state=false
+        }else{
+            document.getElementById("password").setAttribute("type","text");
+            document.getElementById("eye").style.color="#5887ef";
+            state=true;
+        }
+    }
+  
+</script>
+<script>
+      var st=false;
+    function toggled(){
+        if(st){
+            document.getElementById("confirm-password").setAttribute("type","password");
+            document.getElementById("eyec").style.color='#7a797e';
+            st=false
+        }else{
+            document.getElementById("confirm-password").setAttribute("type","text");
+            document.getElementById("eyec").style.color="#5887ef";
+            st=true;
+        }
+    }
+</script>
+<script>
+
+    $('#password').on('focus',function(){
+        $('.password_required').slideDown();
+    })
+    $('#password').on('blur',function(){
+        $('.password_required').slideUp();
+    })
+    $('#password').on('keyup',function(){
+        passValue = $(this).val();
+
+        if(passValue.length==8 || passValue.length>8){
+            $('.special').addClass('active');
+        }else{
+            $('.special').removeClass('active');
+        } 
+        $('.password_required ul li').each(function(index,el){
+            if(!$(this).hasClass('active')){
+                $('.input_submit').removeClass('active')
+            }else{
+                $('.input_submit').addClass('active')
+            }
+        })
+    })
+</script>
+<script>
+    var password=$("#password");
+    var confirmPassword=$("#confirm-password")
+    confirmPassword.keyup(function(){
+        if(confirmPassword.val()==password.val()){
+            confirmPassword.removeClass('invalid').addClass('valid')
+            if(password.val()&& confirmPassword.hasClass("valid")){
+                $("#submit-button").prop("disabled",false)
+            }else{
+                $("#submit-button").prop("disabled",true)
+            }
+        }else{
+            confirmPassword.removeClass("valid").addClass("invalid")
+            $("#submit-button").prop("disabled",true);
+        }
+    })
+
+</script>
+
+
+ <script>
+        // Get the timer element
+        const timerElement = document.querySelector('.timer');
+        const resendButton = document.getElementById('resendButton');
+        // Set the initial time to 1 minute (60 seconds)
+        let timeRemaining = 60;
+
+        // Update the timer every second
+        const timerInterval = setInterval(() => {
+            // Calculate minutes and seconds
+            const minutes = Math.floor(timeRemaining / 60).toString().padStart(2, '0');
+            const seconds = (timeRemaining % 60).toString().padStart(2, '0');
+
+            // Update the timer element
+            timerElement.textContent = `${minutes}:${seconds}`;
+
+            // Decrease the remaining time by 1 second
+            timeRemaining--;
+
+            // Check if the timer has reached 0
+            if (timeRemaining < 0) {
+                // Clear the interval
+                clearInterval(timerInterval);
+
+                // Perform any desired actions when the timer expires
+                // For example, you can display a message or redirect the user
+                resendButton.removeAttribute('disabled');
+                // Redirect the user to a specific page after the timer expires
+              
+            }
+        }, 1000);
+    </script>

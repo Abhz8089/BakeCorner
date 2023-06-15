@@ -1,0 +1,172 @@
+  <body>
+    <style>
+          body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+      background: url(/public/newImages/pinterestdownloader.com-1686408021.095726.gif);
+       opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  filter: drop-shadow(1rem);
+    }
+    @keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.container {
+  animation: slideIn 1s ease-in-out forwards;
+}
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-top: 5%;
+    }
+
+    h4 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #0c0e0c;
+      color: #ffffff;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .link {
+      margin-top: 15px;
+      display: none;
+    }
+
+    .result-link {
+      color: #0000ff;
+    }
+    .share-options{
+     margin-top: 3rem;
+    display: flex;
+   
+    place-content: space-between;
+    }
+    </style>
+   <div class="container bg-success">
+        <h1><b>Earn ₹100!</b></h1>
+        <p><i>Invite your friends to BakeCorner and get Rs.100 cashback</i></p>
+    </div>
+  <div class="container">
+    
+    <br>
+    <form id="referralForm">
+      <div class="form-group">
+        <label>Referral code</label>
+        <input class="form-control"  name="referral_code" value="{{users.referralCode}}" hidden>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn" value="Generate link">
+      </div>
+    </form>
+    <div class="link alert alert-success" role="alert">
+      <strong>Your link:</strong> <a class="result-link" target="_blank"></a>
+    </div>
+  </div>
+  
+  <script>
+  document.getElementById("referralForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    var referralCode = document.getElementsByName("referral_code")[0].value;
+    var link = "http://localhost:3001/signup?referral_code=" + encodeURIComponent(referralCode);
+  
+    // Copy the link to clipboard
+    var tempInput = document.createElement("input");
+    tempInput.setAttribute("value", link);
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+  
+    // Share the link on WhatsApp
+    var whatsappMessage = "Check out this referral link: " + link;
+    var whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(whatsappMessage);
+  
+    // Share the link on Facebook
+    var facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(link);
+  
+    // Update the link element
+    var linkElement = document.getElementsByClassName("result-link")[0];
+    linkElement.textContent = link;
+    linkElement.href = link;
+  
+    // Show the link and share options
+    var linkContainer = document.getElementsByClassName("link")[0];
+    linkContainer.style.display = "block";
+    linkContainer.innerHTML += `
+      <div class="share-options">
+        <a class="custom-btn custom-whatsapp" href="${whatsappUrl}" target="_blank">
+          <i class="fab fa-whatsapp fa-2x"></i>
+        </a>
+        <a class="custom-btn custom-facebook" href="${facebookUrl}" target="_blank">
+          <i class="fab fa-facebook fa-2x"></i>
+        </a>
+        <button class="custom-btn custom-copy" onclick="copyToClipboard()">
+          <i class="far fa-copy fa-2x"></i>
+        </button>
+      </div>
+    `;
+  });
+  
+  function copyToClipboard() {
+    var link = document.getElementsByClassName("result-link")[0].href;
+    var tempInput = document.createElement("input");
+    tempInput.setAttribute("value", link);
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    alert("Link copied to clipboard!");
+  }
+  </script>
+  </body>

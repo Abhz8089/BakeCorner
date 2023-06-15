@@ -1,0 +1,177 @@
+<body>
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #b4bbaf;
+            overflow: hidden;
+        }
+        .row{
+                margin-left: 46%;
+        }
+        h2{
+            font-weight: 700;        
+        }
+    </style>
+    <div>
+        <div class="wrapper d-flex">
+            <div class="sidebar">
+                <div class="innerSide">
+                    <ul>
+                      
+                        <li><a href="#"><i class="fas"></i>Dashboard</a></li>
+                       <li><a style="color: black;" href="#"><i class="fas fa-arrow-right"></i><strong>Products</strong></a></li>
+                        <li><a href="#"><i class="fas"></i>Category</a></li>
+                        <li><a href="#"><i class="fas"></i>Orders</a></li>
+                        <li><a href="#"><i class="fas"></i>Customers</a></li>
+                        <li><a href="#"><i class="fas"></i>Coupons</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            <div class="container" style="overflow-y: scroll; max-height: 500px;">
+                <div class="row" >
+
+                    <form action="/admin/edit-product/{{product._id}}" method="POST" enctype="multipart/form-data">
+                        <h2 class="text-center mt-5">Edit Product</h2>
+                        <label for="">Name:</label>
+                        <input type="text" name="name" class="form-control" value="{{product.name}}">
+
+                                 <div class="dropdown">
+
+                                    <label for="category">Category:</label>
+                                    <select name="category" class="form-control" required>
+                                        <option value="">Select a category</option>
+                                        {{#each category}}
+                                        <option>{{this.Cname}}</option>
+                                        {{/each}}
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+                               
+                        <label for="">Price:</label>
+                        <input type="number" name="price" class="form-control" min="0" step="0.01"
+                            value="{{product.price}}">
+
+
+                        <label for="description">Description:</label>
+                        
+                            
+                        <input type="text" name="description" class="form-control" value="{{product.description}}">
+
+
+                        <label for="">Image:</label>
+                        <img src="{{product.photos.[0].fileName}}" alt="" style="width: 100px;height:auto" id="imgView" class="pt-3">
+                        <input type="file" name="image" class="form-control-file" onchange="viewImage(event)" accept="image/*" multiple >
+                          <div id="imageInput">
+                                    <div id="image-container">
+                                        <img id="image-preview" src="" alt="Preview Image">
+                                    </div>
+                                </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+    </div>
+
+
+</body>
+<script>
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+<script>
+  // Get the necessary elements
+  const imageInput = document.querySelector('input[name="image"]');
+  const imageContainer = document.getElementById('image-container');
+
+  // Initialize the cropper instances
+  const croppers = [];
+
+  // Handle the image selection
+  imageInput.addEventListener('change', (event) => {
+    const files = event.target.files;
+
+    // Clear the image container
+    imageContainer.innerHTML = '';
+
+    // Create cropper and preview for each selected image
+    Array.from(files).forEach((file) => {
+      const cropper = createCropper(file);
+      croppers.push(cropper);
+    });
+  });
+
+  // Function to create a cropper for a specific file
+  function createCropper(file) {
+    // Create a FileReader to read the image file
+    const reader = new FileReader();
+
+    // Create the image preview element
+    const imagePreview = document.createElement('img');
+    imagePreview.src = URL.createObjectURL(file);
+    imagePreview.alt = 'Preview Image';
+    imagePreview.classList.add('cropped-image-preview'); // Apply the CSS class for smaller image size
+    imageContainer.appendChild(imagePreview);
+
+    // Initialize the cropper
+    const cropper = new Cropper(imagePreview, {
+      aspectRatio: 1, // Set the desired aspect ratio for cropping (e.g., 1:1 for a square)
+      viewMode: 2, // Set the desired view mode (0: 'free', 1: 'crop', 2: 'preview', 3: 'rotate')
+      autoCropArea: 0.8, // Set the initial crop area size as a percentage (e.g., 0.8 for 80% of the image)
+         cropend: function () {
+        // Update the height of the cropper container dynamically based on the cropped image's aspect ratio
+        const cropperContainer = cropper.getCropBoxData();
+        const aspectRatio = cropperContainer.width / cropperContainer.height;
+        const cropperContainerHeight = Math.min(48 * 16, cropperContainer.width / aspectRatio);
+        cropper.setCropBoxData({ height: cropperContainerHeight });
+      }
+    });
+
+    return cropper;
+  }
+
+  // Handle form submission
+  document.querySelector('#forms').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Create an array to store the cropped image data
+    const croppedImagesData = [];
+
+    // Get the cropped image data for each cropper
+    croppers.forEach((cropper) => {
+      const croppedCanvas = cropper.getCroppedCanvas();
+
+      if (croppedCanvas) {
+        const croppedImageData = croppedCanvas.toDataURL('image/png');
+        croppedImagesData.push(croppedImageData);
+      }
+    });
+
+    // Create hidden input fields for each cropped image data
+    croppedImagesData.forEach((croppedImageData) => {
+      const croppedImageInput = document.createElement('input');
+      croppedImageInput.type = 'hidden';
+      croppedImageInput.name = 'croppedImages[]';
+      croppedImageInput.value = croppedImageData;
+      event.target.appendChild(croppedImageInput);
+    });
+
+    // Submit the form
+    event.target.submit();
+  });
+</script>

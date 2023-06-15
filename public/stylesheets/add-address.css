@@ -1,0 +1,254 @@
+
+@keyframes fade-in {
+0% {
+opacity: 0;
+}
+to {
+opacity: 1;
+}
+}
+.personal-address-child {
+position: absolute;
+top: 2001px;
+left: -27px;
+background-color: var(--color-black);
+width: 1539px;
+height: 371px;
+}
+.facebook {
+margin: 0;
+}
+.facebook-twitter-youtube-container,
+.social {
+position: absolute;
+top: 2120px;
+left: 1021px;
+display: inline-block;
+width: 92px;
+}
+.social {
+top: 2073px;
+left: 1027px;
+text-decoration: underline;
+width: 77px;
+}
+.payment-cancellation-and-container {
+top: 2120px;
+left: 617px;
+width: 243px;
+}
+.help,
+.payment-cancellation-and-container,
+.who-we-are-container {
+position: absolute;
+display: inline-block;
+}
+.help {
+top: 2066px;
+left: 648px;
+font-size: var(--font-size-13xl);
+text-decoration: underline;
+width: 60px;
+}
+.who-we-are-container {
+top: 2120px;
+left: 182px;
+white-space: pre-wrap;
+width: 139px;
+}
+.personal-address-inner {
+position: absolute;
+top: 698px;
+left: 65px;
+width: 410px;
+height: 123px;
+}
+.about-bake-corener,
+.mail-us {
+position: absolute;
+display: inline-block;
+}
+.about-bake-corener {
+top: 2059px;
+left: 138px;
+font-size: var(--font-size-13xl);
+text-decoration: underline;
+width: 256px;
+}
+.mail-us {
+top: 2341px;
+left: 1161px;
+width: 325px;
+}
+.rectangle-icon {
+position: absolute;
+top: 120px;
+left: 0;
+width: 1512px;
+height: 85px;
+object-fit: cover;
+}
+.delivery-address {
+position: absolute;
+top: 129px;
+left: 630px;
+font-size: 48px;
+font-family: var(--font-inter);
+color: var(--color-black);
+}
+.personal-address-child1 {
+position: absolute;
+top: 2107px;
+left: -199.93px;
+background-color: var(--color-yellow);
+filter: blur(554px);
+border: 1px solid var(--color-black);
+box-sizing: border-box;
+width: 728.75px;
+height: 296.5px;
+transform: rotate(42.44deg);
+transform-origin: 0 0;
+}
+.step-up-india-container {
+position: absolute;
+top: 2326px;
+left: 602px;
+font-size: var(--font-size-mini);
+letter-spacing: 0.04em;
+text-transform: capitalize;
+font-family: var(--font-raleway);
+white-space: pre-wrap;
+display: inline-block;
+width: 516px;
+}
+.personal-address-child2 {
+position: absolute;
+top: 214px;
+left: 0;
+background-color: #f6f2f2;
+box-shadow: 0 17px 4px rgba(0, 0, 0, 0.25);
+border: 1px solid var(--color-black);
+box-sizing: border-box;
+width: 1512px;
+height: 1786px;
+}
+.line-icon,
+.personal-address-child3,
+.personal-address-child4 {
+position: absolute;
+top: 456.5px;
+left: 127px;
+width: 249px;
+height: 1px;
+}
+.personal-address-child3,
+.personal-address-child4 {
+top: 550.5px;
+}
+.personal-address-child4 {
+top: 644.5px;
+}
+.personal-address-child5,
+.personal-address-child6,
+.rectangle-input {
+border: 1px solid var(--color-black);
+background-color: var(--color-white);
+position: absolute;
+top: 399px;
+left: 72px;
+box-sizing: border-box;
+width: 640px;
+height: 104px;
+}
+.personal-address-child5,
+.personal-address-child6 {
+top: 599px;
+}
+.personal-address-child6 {
+top: 1147px;
+}
+.personal-address-child10,
+.personal-address-child11,
+.personal-address-child7,
+.personal-address-child8,
+.personal-address-child9,
+.rectangle-textarea {
+border: 1px solid var(--color-black);
+background-color: var(--color-white);
+position: absolute;
+top: 1374px;
+left: 72px;
+box-sizing: border-box;
+width: 640px;
+height: 104px;
+}
+.personal-address-child10,
+.personal-address-child11,
+.personal-address-child8,
+.personal-address-child9,
+.rectangle-textarea {
+left: 817px;
+width: 580px;
+}
+.personal-address-child10,
+.personal-address-child11,
+.personal-address-child9,
+.rectangle-textarea {
+top: 1147px;
+}
+.personal-address-child10,
+.personal-address-child11,
+.rectangle-textarea {
+top: 815px;
+left: 72px;
+width: 1325px;
+height: 209px;
+}
+.personal-address-child10,
+.personal-address-child11 {
+top: 599px;
+left: 817px;
+width: 580px;
+height: 104px;
+}
+.personal-address-child11 {
+top: 399px;
+}
+.rectangle-button {
+cursor: pointer;
+border: 1.2px solid #130c3a;
+padding: 0;
+background-color: #1b1060;
+position: absolute;
+top: 1626px;
+left: 444px;
+border-radius: 31px;
+box-shadow: 0 17px 4px rgba(0, 0, 0, 0.25);
+box-sizing: border-box;
+width: 624px;
+height: 66px;
+}
+.image-87-icon {
+position: absolute;
+top: 113px;
+left: 496px;
+width: 118px;
+height: 99px;
+object-fit: cover;
+}
+.personal-address {
+position: relative;
+background-color: #d9d9d9;
+width: 100%;
+height: 2368px;
+overflow: hidden;
+opacity: 0;
+text-align: left;
+font-size: var(--font-size-5xl);
+color: var(--color-white);
+font-family: var(--font-league-spartan);
+}
+.personal-address.animate {
+animation: 1s ease 0s 1 normal forwards fade-in;
+}
+

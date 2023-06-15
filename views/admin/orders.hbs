@@ -1,0 +1,428 @@
+ {{!-- <body>
+
+
+
+    <style>
+        body {
+            background-color: #d8d1d1;
+            margin-top: 6rem;
+            margin-left: -16rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            font-family: arial;
+
+        }
+
+        body {
+            background: #eee;
+        }
+
+        .wrapper {
+            position: absolute;
+        }
+
+        .sidebar {
+            position: relative;
+            width: 250px;
+            height: 43rem;
+            background: #3b3b3b;
+            padding: 10px 0;
+
+        }
+
+        .wrapper .sidebar ul li {
+            padding: 15px;
+        }
+
+        .wrapper .sidebar ul li a {
+            color: #bdb8d7;
+            display: block;
+        }
+
+        .wrapper .sidebar ul li a .fas {
+            width: 25px !important;
+        }
+
+        .wrapper .sidebar ul li a .far {
+            width: 25px !important;
+        }
+
+        .wrapper .sidebar ul li:hover {
+            background: #311B92;
+        }
+
+        .wrapper .sidebar ul li a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .myproject {
+            margin-top: 25px;
+            color: #ffffffa8;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .userProfile {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            display: flex;
+
+        }
+
+        .userProfile a {
+            width: 20px;
+            background: #4527A0;
+            color: #bdb8d7;
+            text-decoration: none;
+            font-size: 15px;
+        }
+    .innerSide {
+
+            margin-top: 4rem;
+            border-radius: 2rem;
+            background-color: white;
+            box-shadow: 13px;
+
+
+        }
+
+        .pic {
+            margin-left: 19rem;
+            margin-right: 2rem;
+        }
+    </style>
+    <div>
+       
+        <div class="pic">
+            
+            <table class="table table-bordered mt-4" id="productsTable" >
+                <thead>
+                    <tr>
+                        
+                        <th scope="col">Date</th>
+                         <th scope="col">Address</th>
+                        <th scope="col">pincode</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Go</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orders}}
+                    <tr>
+                        
+                        <td>{{this.Date}}</td>
+                        <td>{{this.deliveryDetails.address}}</td>
+                         <td>{{this.deliveryDetails.pincode}}</td>
+                          <td>{{this.deliveryDetails.mobile}}</td>
+                           <td>{{this.totalAmount}}</td>
+                           <td>{{this.paymentMethod}}</td>
+                          <td>{{this.status}}</td>                                                                                                                                              
+                        <td>
+                            <a href="/view-order-products/{{this._id}}" class="btn btn-primary">View Products</a>
+                         <a onclick="return confirm('Are you sure you want to cancel this order?') && cancelProduct('{{this._id}}')" class="btn btn-danger">Cancel Order</a>
+
+                           
+                        </td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+  $(function(){
+    $('#productsTable').DataTable({
+        "dom": '<"top"i>rt<"bottom"flp><"clear">',
+    });
+  })
+</script>
+
+<script>
+    function cancelProduct(orderId){
+        console.log(orderId)
+        $.ajax({
+            url:'/cancel-order',
+            method:'POST',
+            data:{
+                orderId:orderId
+            },
+            success:function(response){
+                location.reload();
+            }
+        })
+    }
+</script>  --}}
+
+<body>
+
+
+
+    <style>
+        body {
+            background-color: #6d6161;
+            
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            font-family: arial;
+
+        }
+
+        body {
+            background: #eee;
+           
+        }
+
+        .wrapper {
+            position: absolute;
+        }
+
+        .sidebar {
+            position: relative;
+            width: 250px;
+            height: 43rem;
+            background: #3b3b3b;
+            padding: 10px 0;
+            margin-top: -24px;
+        }
+
+        .wrapper .sidebar ul li {
+            padding: 15px;
+        }
+
+        .wrapper .sidebar ul li a {
+            color: #bdb8d7;
+            display: block;
+        }
+
+        .wrapper .sidebar ul li a .fas {
+            width: 25px !important;
+        }
+
+        .wrapper .sidebar ul li a .far {
+            width: 25px !important;
+        }
+
+        .wrapper .sidebar ul li:hover {
+            background: #311B92;
+        }
+
+        .wrapper .sidebar ul li a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .myproject {
+            margin-top: 25px;
+            color: #ffffffa8;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .userProfile {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            display: flex;
+
+        }
+
+        .userProfile a {
+            width: 20px;
+            background: #4527A0;
+            color: #bdb8d7;
+            text-decoration: none;
+            font-size: 15px;
+        }
+    .innerSide {
+
+            margin-top: 4rem;
+            border-radius: 2rem;
+            background-color: white;
+            box-shadow: 13px;
+
+
+        }
+
+        .pic {
+            margin-left: 19rem;
+            margin-right: 2rem;
+        }
+        tbody{
+            color: black;
+        }
+    </style>
+    <div style="margin-top: 24px;">
+        <div class="wrapper d-flex">
+            <div class="sidebar">
+                <div class="innerSide">
+                    <ul>
+
+                        <li><a href="#"><i class="fas"></i>Dashboard</a></li>
+
+                        {{!-- <li><a href="#"><i class="fas fa-arrow-right"></i><strong>Products</strong></a></li> --}}
+                        <li><a href="/admin"><i class="fas"></i>Products</a></li>
+                      
+
+
+                        <li><a href="/admin/view-category"><i class="fas"></i>Category</a></li>
+                          <li ><a style="color: black;" href="#"><i
+                                    class="fas fa-arrow-right"></i><strong>Orders</strong></a></li>
+                        
+                        <li><a href="/admin/user-data"><i class="fas"></i>Customers</a></li>
+                        <li><a href="#"><i class="fas"></i>Coupons</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+        {{!-- <div class="pic">
+            <div class="row">
+                <a href="/admin/add-product" class="btn btn-success ml-auto mt-3">Add products</a>
+            </div>
+            <table class="table table-dark mt-4" id="productsTable" >
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                    <tr>
+                        <td><img style="width:50px; height:50px" src="/public/images/{{this._id}}.jpg" alt=""></td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.category}}</td>
+                        <td>{{this.price}}</td>
+                        <td>{{this.description}}</td>
+
+                        <td>
+                            <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+                            <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger"
+                                onclick="return confirm('Are you want to delete {{this.name}} ?')">Delete</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div> --}}
+          <div class="pic">
+            
+            <table class="table table-bordered mt-4" id="productsTable" >
+                <thead>
+                    <tr>
+                        
+                        <th scope="col">Date</th>
+                        <th scope="col">Name</th>
+                         <th scope="col">Address</th>
+                        <th scope="col">pincode</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Go</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orders}}
+                    <tr>
+                        {{!-- <td><img style="width:50px; height:50px" src="/public/images/{{this.products.item}}.jpg" alt=""></td> --}}
+                        
+                        <td>{{this.Date}}</td>
+                        <td>{{this.deliveryDetails.name}}</td>
+                        <td>{{this.deliveryDetails.address}}</td>
+                         <td>{{this.deliveryDetails.pincode}}</td>
+                          <td>{{this.deliveryDetails.mobile}}</td>
+                           <td>{{this.totalAmount}}</td>
+                           <td>{{this.paymentMethod}}</td>
+                          <td>{{this.status}}</td>                                                                                                                                              
+                        <td>
+                            {{#if (eq this.status "Delivered")}}
+                            
+                             
+                           {{else if (eq this.status "cancelled")}}
+                            
+                            {{else if (eq this.status "Return Success")}}
+
+                            {{else if (eq this.status "Return")}}
+                             <a onclick="return confirm('Are you sure ?') " href="return-success/{{this._id}}" class="btn btn-success">Return suc</a>
+                             {{else}}
+
+                            <a onclick="return confirm('Are you sure you want to cancel this order?') " href="out-of-stock/{{this._id}}" class="btn btn-success">Delivered</a>
+                             <a onclick="return confirm('Are you sure you want to cancel this order?')" href="admin-cancel/{{this._id}}" class="btn btn-danger">Cancel Order</a>
+                             
+                           {{/if}}
+                           <a href="view-admin-order/{{this._id}}" class="btn btn-danger">View Order</a>
+                           {{!-- {{#if (eq this.status "Return")}}
+                           
+                           {{/if}} --}}
+
+                        </td>
+                      
+ 
+
+
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</body>
+{{!-- jQuery CDN --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {{!-- datatable.css --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+{{!-- DataTables JavaScript  --}}
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(function() {
+        $('#productsTable').DataTable({
+            "dom": '<"top"lf>t<"bottom"ip>',
+            "lengthMenu": [10, 25, 50, 75, 100],
+            "language": {
+                "search": "Search products:",
+                "paginate": {
+                    "previous": "Previous",
+                    "next": "Next"
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,432 @@
+
+   
+
+  
+   
+
+
+<body>
+    <style>
+   /* CSS */
+.fadeIn {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.custom-badge {
+  background-color: #ff9800; /* Replace with your custom color */
+  color: #ffffff; /* Replace with your preferred text color */
+}
+
+.animated-badge {
+  animation: pulse 2s infinite;
+}
+
+    @media (max-width: 768px) {
+        .reduce-font-size {
+            font-size:3rem;
+        }
+    }
+
+#ribbon{
+  background:#fa6f57;
+  height: 30px;
+  width:auto;
+  display: inline-block;
+
+  position: relative;
+  color:#FFF;
+  line-height: 30px;
+  padding:0px 20px;
+  font-size: 100%;
+}
+@media (max-width: 767px) {
+  #ribbon {
+    font-size: 50%;
+  }
+}
+
+#ribbon:after{
+  content:"";
+  top:0px;
+  position: absolute;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 30px solid #fa6f57;
+}
+
+#ribbon:before{
+  content:"";
+  height:0;
+  width: 0;
+  top:0px;
+  right:-30px;
+  position: absolute;
+  border-style: solid;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 30px solid #fa6f57;
+}
+</style>
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                   <img class="w-100" src="/public/project-images/strawberry-background.jpg" style="filter: blur(2px); alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-lg-7">
+                                    <h1 class="display-2 mb-5 animated slideInDown reduce-font-size" ><i><b>
+                                       " We provide a slice of heaven"</b></i></h1>
+                                    <a href="#view-productss" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
+                                    <a href="" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="/public/project-images/pizza background.jpg" style="filter: blur(2px);" alt="Image">
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row justify-content-start">
+                                <div class="col-lg-7">
+                                    <h1 class="display-2 mb-5 animated slideInDown reduce-font-size"><i> "Satisfy cravings, delightfully." </i> </h1>
+                                    <a href="#view-productss" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
+                                    <a href="" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="prev" style="opacity: 0;">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="next" style="opacity: 0;">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                        <img class="img-fluid w-100" src="/public/project-images/caking making2.jpeg">
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <h1 class="display-5 mb-4"> Relish the Finest Selection of Handcrafted Cakes and Tempting Snacks!</h1>
+                    <p class="mb-4">The bakery sends out such a heavenly fragrance that nurtures a great promise.Bakers are known for making each bite soulful and joyous</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Owning a bakery is heavenly and magical</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>If you try a bakery once, you will forget the rest</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Bakeries make delicacies available from their kitchens to ours</p>
+                    <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Feature Start -->
+    <div class="container-fluid bg-light bg-icon my-5 py-6">
+        <div class="container">
+            <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <h1 class="display-5 mb-3">Our Features</h1>
+                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="bg-white text-center h-100 p-4 p-xl-5">
+                        <img class="img-fluid mb-4" src="/public/project-images/cartoon bg.jpg" alt="">
+                        <h4 class="mb-3">Natural Process</h4>
+                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
+                        <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="bg-white text-center h-100 p-4 p-xl-5">
+                        <img class="img-fluid mb-4" src="/public/images/caroon images.png" alt="">
+                        <h4 class="mb-3">Delicious Products</h4>
+                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
+                        <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="bg-white text-center h-100 p-4 p-xl-5">
+                        <img class="img-fluid mb-4" src="/public/project-images/cartoon chef.jpg" alt="">
+                        <h4 class="mb-3">Delightful Cravings</h4>
+                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
+                        <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Feature End -->
+
+
+    <!-- Product Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-0 gx-5 align-items-end">
+                <div class="col-lg-6">
+                    <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                        <h1 class="display-5 mb-3" id="view-productss">Our Products</h1>
+                        <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                        {{#each category}}
+                        <li class="nav-item me-2">
+                            {{!-- <a  class="btn btn-outline-primary  active" data-bs-toggle="pill" href="/viewCproduct/{{this.Cname}}" >{{this.Cname}}</a> --}}
+                            <a href="/viewCproduct/{{this.Cname}}" class="btn btn-outline-success">{{this.Cname}}</a>
+                        
+                        </li>
+                        
+                        {{/each}}
+            
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    
+                    <div class="row g-4">
+                        {{#if users}}
+                        {{#each products}}
+                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="product-item">
+                                <div class="position-relative bg-light overflow-hidden">
+                                  <a href="/view/{{this._id}}"> <img class="img-fluid w-100" src="{{this.photos.[0].fileName}}"  alt=""> </a> 
+                                     
+                                    
+                                </div>
+                                <div class="text-center p-4">
+                                    <span class="badge custom-badge animated-badge">New Release</span>
+
+
+                                    <a class="d-block h5 mb-2" href="">{{this.name}}</a>
+                                    <span class="text-primary me-1">$19.00</span>
+                                    <span class="text-body text-decoration-line-through">₹{{this.price}}</span>
+                                    <div id="addToCartMsg_{{this._id}}"></div>
+                                </div>
+                                <div class="d-flex border-top">
+                                    <small class="w-50 text-center border-end py-2">
+                                        <a class="text-body" href="/view/{{this._id}}"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                    </small>
+                                    <small class="w-50 text-center py-2">
+                                        {{!-- <a class="text-body" href="/add-to-cart/{{this._id}}"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a> --}}
+                                        <button onclick="addToCart('{{this._id}}') " class="text-body" style="border:white;"><i class="fa fa-shopping-bag text-primary me-2">Add to Cart</i></button>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        {{else}}
+                          {{#each products}}
+                           <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="product-item" style="height: 45%;">
+                                <div class="position-relative bg-light overflow-hidden">
+                                  <a href="/view/{{this._id}}"><img class="img-fluid w-100" src="{{this.photos.[0].fileName}}"  alt=""></a>  
+                                     
+                                    
+                                </div>
+                                <div class="text-center p-4">
+                                    <span class="badge custom-badge animated-badge">New Release</span>
+
+
+                                    <a class="d-block h5 mb-2" href="">{{this.name}}</a>
+                                    <span class="text-primary me-1">$19.00</span>
+                                    <span class="text-body text-decoration-line-through">₹{{this.price}}</span>
+                                    <div id="addToCartMsg_{{this._id}}"></div>
+                                </div>
+                                <div class="d-flex border-top">
+                                    <small class="w-50 text-center border-end py-2">
+                                        <a class="text-body" href="/view/{{this._id}}"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                    </small>
+                                 
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                        
+                        {{/if}}
+                    
+                    </div>
+             
+            </div>
+        </div>
+    </div>
+    <!-- Product End -->
+
+
+    <!-- Firm Visit Start -->
+    <div class="parent" style="    margin-top: 2rem;
+   
+    background: linear-gradient(135deg, #a6c1aa 0%, #b35555 100%);
+">
+
+       <div class="container" style="width: 40%;" >
+        <div class="left">
+    <h1 style=" font-size: 30px; text-align: center; margin-top: 20px; font-weight: 800;   font-family: Satisfy, cursive;font-size: 30px;color: rgb(208, 219, 2);
+  text-shadow: 0.02em 0.02em 0 Brown, 0 0 0.5em violet;">Introducing new offers</h1>
+</div>
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/public/images/0c0805e9ad3ba0b215bc0beb76d01e00.png" class="d-block w-100" alt="...">
+              <div id="ribbon">
+  Special Deal: 40%off !
+</div>
+    </div>
+    <div class="carousel-item">
+      <img src="/public/images/0913438c73ece5bab8edc74c75ea2e4c.png" class="d-block w-100" alt="...">
+        <div id="ribbon">
+  Special Deal: 40%off !
+</div>
+    </div>
+   
+  </div>
+  
+  <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  
+</div>
+    
+	</div>
+
+   </div>    
+  
+   
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s"  id="view-footer">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                     <h1 class="fw-bold text-primary mb-4" style="margin-top: 22px; font-family: Georgia, serif;
+    font-weight: 800;">BAKE CORNER</h1>
+                    <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Address</h4>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, Alpy, Kerala</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p><i class="fa fa-envelope me-3"></i>bakecorner@example.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Quick Links</h4>
+                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="">Contact Us</a>
+                    <a class="btn btn-link" href="">Our Services</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Newsletter</h4>
+                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="#">www.bakecorner.com</a>, All Right Reserved.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a href="#">***</a>
+                        <br>Distributed By: <a href="#" target="_blank">$$$</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    {{!-- <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script> --}}
+
+    <!-- Template Javascript -->
+    <script src="/public/lib/js/main.js"></script>
+    
+</body>
+
+<script>
+{{!-- function addToCartSuccess(productId) {
+  // Send an AJAX request to the server to add the product to the cart
+  // You can use any AJAX library or the native fetch API
+
+  // Assuming the request is successful, update the success message
+  const msgElement = document.getElementById(`addToCartMsg_${productId}`);
+  msgElement.innerText = 'Product added to cart';
+  msgElement.style.color = 'green';
+}
+</script> --}}

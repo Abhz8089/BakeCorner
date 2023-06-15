@@ -1,0 +1,59 @@
+<body>
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #b4bbaf;
+            overflow: hidden;
+        }
+        .row{
+                margin-left: 46%;
+        }
+        h2{
+            font-weight: 700;        
+        }
+    </style>
+    <div>
+        <div class="wrapper d-flex">
+            <div class="sidebar">
+                <div class="innerSide">
+                    <ul>
+                        <li><a href="#"><i class="fas"></i>Dashboard</a></li>
+                        <li><a href="/admin"><i class="fas"></i>Products</a></li>
+                        <li><a style="color: black;" href="#"><i class="fas fa-arrow-right"></i><strong>Category</strong></a></li>
+                        <li><a href="#"><i class="fas"></i>Orders</a></li>
+                        <li><a href="#"><i class="fas"></i>Customers</a></li>
+                        <li><a href="#"><i class="fas"></i>Coupons</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            
+                <div class="row">
+
+                    <form action="/admin/edit-category/{{category._id}}" method="POST" >
+                        <h2 class="text-center mt-5">Edit Category</h2>
+                    
+                        
+                        <label for="">Category Name:</label>
+                        <input type="text" name="name" class="form-control" value="{{category.Cname}}">
+                                                                                             
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </form>
+
+                </div>
+            
+        </section>
+
+
+
+
+
+
+    </div>
+
+
+</body>

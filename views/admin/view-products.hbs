@@ -1,0 +1,409 @@
+<body>
+
+
+
+    <style>
+        body {
+            background-color: #6d6161;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style: none;
+            text-decoration: none;
+            font-family: arial;
+
+        }
+
+        body {
+            background: #eee;
+        }
+
+        .wrapper {
+            position: absolute;
+        }
+
+        .sidebar {
+            position: relative;
+            width: 250px;
+            height: 43rem;
+            background: #3b3b3b;
+            padding: 10px 0;
+
+        }
+
+        .wrapper .sidebar ul li {
+            padding: 15px;
+        }
+
+        .wrapper .sidebar ul li a {
+            color: #bdb8d7;
+            display: block;
+        }
+
+        .wrapper .sidebar ul li a .fas {
+            width: 25px !important;
+        }
+
+        .wrapper .sidebar ul li a .far {
+            width: 25px !important;
+        }
+
+        .wrapper .sidebar ul li:hover {
+            background: #311B92;
+        }
+
+        .wrapper .sidebar ul li a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .myproject {
+            margin-top: 25px;
+            color: #ffffffa8;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .userProfile {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            display: flex;
+
+        }
+
+        .userProfile a {
+            width: 20px;
+            background: #4527A0;
+            color: #bdb8d7;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .innerSide {
+
+            margin-top: 4rem;
+            border-radius: 2rem;
+            background-color: white;
+            box-shadow: 13px;
+
+
+        }
+
+        .pic {
+            margin-left: 19rem;
+            margin-right: 2rem;
+        }
+
+        tbody {
+            color: black;
+        }
+      .cropped-image-preview {
+    max-width: 150px; /* Adjust the maximum width as needed */
+    max-height: 150px; /* Adjust the maximum height as needed */
+  }
+   .cropper-container {
+  width: 300px;
+  height: 300px;
+}
+
+    </style>
+    <div>
+        <div class="wrapper d-flex">
+            <div class="sidebar">
+                <div class="innerSide">
+                    <ul>
+
+                        <li><a href="/admin/dashboard"><i class="fas"></i>Dashboard</a></li>
+
+                        {{!-- <li><a href="#"><i class="fas fa-arrow-right"></i><strong>Products</strong></a></li> --}}
+                        <li><a style="color: black;" href="#"><i
+                                    class="fas fa-arrow-right"></i><strong>Products</strong></a></li>
+
+
+                        <li><a href="/admin/view-category"><i class="fas"></i>Category</a></li>
+                        <li><a href="/admin/adminOrders"><i class="fas"></i>Orders</a></li>
+                        <li><a href="/admin/user-data"><i class="fas"></i>Customers</a></li>
+                        <li><a href="/admin/coupon"><i class="fas"></i>Coupons</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="pic">
+            <div class="row">
+                <!-- Add product button triggers the modal -->
+                <button type="button" class="btn btn-success ml-auto mt-3" data-toggle="modal"
+                    data-target="#addProductModal">Add products</button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog"
+                aria-labelledby="addProductModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/admin/add-product" id="forms" method="POST" enctype="multipart/form-data">
+                                <label for="">Name:</label>
+                                <input type="text" name="name" class="form-control" required>
+
+                                <div class="dropdown">
+
+                                    <label for="category">Category:</label>
+                                    <select name="category" class="form-control" required>
+                                        <option value="">Select a category</option>
+                                        {{#each category}}
+                                        <option>{{this.Cname}}</option>
+                                        {{/each}}
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+
+                                <label for="">Price:</label>
+                                <input type="number" name="price" class="form-control" min="0" step="0.01" required>
+
+                                <label for="description">Description:</label>
+                                <input type="text" name="description" class="form-control" required>
+
+
+                                <label for="image">Image:</label>
+                                <input type="file" name="image" class="form-control-file" accept="image/*" multiple
+                                    required>
+                                <div id="imageInput">
+                                    <div id="image-container">
+                                        <img id="image-preview" src="" alt="Preview Image">
+                                    </div>
+                                </div>
+                                <button id="submitBtn" type="submit" class="btn btn-primary mt-2">Submit</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-dark mt-4" id="productsTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                    <tr>
+                        <td><img style="width:50px; height:50px" src="{{this.photos.[0].fileName}}" alt=""></td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.category}}</td>
+                        <td>{{this.price}}</td>
+                        <td>{{this.description}}</td>
+
+                        <td>
+                            <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+                            <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger"
+                                onclick="return confirm('Are you want to delete {{this.name}} ?')">Delete</a>
+                            <a href="/admin/delete-Image/{{this._id}}" class="btn btn-danger"
+                                onclick="return confirm('Are you want to delete {{this.name}} ?')">Delete Image</a>
+
+                        </td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+
+{{!-- jQuery CDN --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{!-- datatable.css --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+{{!-- DataTables JavaScript --}}
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(function () {
+        $('#productsTable').DataTable({
+            "dom": '<"top"lf>t<"bottom"ip>',
+            "lengthMenu": [10, 25, 50, 75, 100],
+            "language": {
+                "search": "Search products:",
+                "paginate": {
+                    "previous": "Previous",
+                    "next": "Next"
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+  // Get the necessary elements
+  const imageInput = document.querySelector('input[name="image"]');
+  const imageContainer = document.getElementById('image-container');
+
+  // Initialize the cropper instances
+  const croppers = [];
+
+  // Handle the image selection
+  imageInput.addEventListener('change', (event) => {
+    const files = event.target.files;
+
+    // Clear the image container
+    imageContainer.innerHTML = '';
+
+    // Create cropper and preview for each selected image
+    Array.from(files).forEach((file) => {
+      const cropper = createCropper(file);
+      croppers.push(cropper);
+    });
+  });
+
+  // Function to create a cropper for a specific file
+  function createCropper(file) {
+    // Create a FileReader to read the image file
+    const reader = new FileReader();
+
+    // Create the image preview element
+    const imagePreview = document.createElement('img');
+    imagePreview.src = URL.createObjectURL(file);
+    imagePreview.alt = 'Preview Image';
+    imagePreview.classList.add('cropped-image-preview'); // Apply the CSS class for smaller image size
+    imageContainer.appendChild(imagePreview);
+
+    // Initialize the cropper
+    const cropper = new Cropper(imagePreview, {
+      aspectRatio: 1, // Set the desired aspect ratio for cropping (e.g., 1:1 for a square)
+      viewMode: 2, // Set the desired view mode (0: 'free', 1: 'crop', 2: 'preview', 3: 'rotate')
+      autoCropArea: 0.8, // Set the initial crop area size as a percentage (e.g., 0.8 for 80% of the image)
+         cropend: function () {
+        // Update the height of the cropper container dynamically based on the cropped image's aspect ratio
+        const cropperContainer = cropper.getCropBoxData();
+        const aspectRatio = cropperContainer.width / cropperContainer.height;
+        const cropperContainerHeight = Math.min(48 * 16, cropperContainer.width / aspectRatio);
+        cropper.setCropBoxData({ height: cropperContainerHeight });
+      }
+    });
+
+    return cropper;
+  }
+
+  // Handle form submission
+  document.querySelector('#forms').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // Create an array to store the cropped image data
+    const croppedImagesData = [];
+
+    // Get the cropped image data for each cropper
+    croppers.forEach((cropper) => {
+      const croppedCanvas = cropper.getCroppedCanvas();
+
+      if (croppedCanvas) {
+        const croppedImageData = croppedCanvas.toDataURL('image/png');
+        croppedImagesData.push(croppedImageData);
+      }
+    });
+
+    // Create hidden input fields for each cropped image data
+    croppedImagesData.forEach((croppedImageData) => {
+      const croppedImageInput = document.createElement('input');
+      croppedImageInput.type = 'hidden';
+      croppedImageInput.name = 'croppedImages[]';
+      croppedImageInput.value = croppedImageData;
+      event.target.appendChild(croppedImageInput);
+    });
+
+    // Submit the form
+    event.target.submit();
+  });
+</script>
+<!-- Cropper.js -->
+
+
+<!-- Your JavaScript code -->
+{{!-- 
+<script>
+    // Get the necessary elements
+    const imageInput = document.querySelector('input[name="image"]');
+    const imagePreview = document.getElementById('image-preview');
+    const imageContainer = document.getElementById('image-container');
+
+    // Initialize the cropper instance
+    let cropper;
+
+    // Handle the image selection
+    imageInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+
+        // Check if a file is selected
+        if (file) {
+            // Create a FileReader to read the image file
+            const reader = new FileReader();
+
+            // Load the image into the preview element
+            reader.onload = () => {
+                imagePreview.src = reader.result;
+
+                // Initialize the cropper
+                cropper = new Cropper(imagePreview, {
+                    aspectRatio: 1, // Set the desired aspect ratio for cropping (e.g., 1:1 for a square)
+                    viewMode: 2, // Set the desired view mode (0: 'free', 1: 'crop', 2: 'preview', 3: 'rotate')
+                    autoCropArea: 0.8, // Set the initial crop area size as a percentage (e.g., 0.8 for 80% of the image)
+                    // Add any other desired options here
+                });
+            };
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(file);
+
+            // Show the image container
+            imageContainer.style.display = 'block';
+        }
+    });
+// Handle form submission
+document.querySelector('#forms').addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  // Get the cropped image data
+  const croppedCanvas = cropper.getCroppedCanvas();
+  
+  // Check if the cropped canvas is available
+  if (croppedCanvas) {
+    // Convert the cropped canvas to a data URL
+    const croppedImageData = croppedCanvas.toDataURL('image/png');
+
+    // Create a new hidden input field to store the cropped image data
+    const croppedImageInput = document.createElement('input');
+    croppedImageInput.type = 'hidden';
+    croppedImageInput.name = 'croppedImage';
+    croppedImageInput.value = croppedImageData;
+
+    // Append the hidden input field to the form
+   event.target.appendChild(croppedImageInput);
+
+  // Submit the form
+  event.target.submit();
+});
+
+</script> --}}

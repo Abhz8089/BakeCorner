@@ -1,0 +1,76 @@
+<body>
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #b4bbaf;
+            overflow: hidden;
+        }
+        .row{
+                margin-left: 46%;
+        }
+        h2{
+            font-weight: 700;        
+        }
+    </style>
+    <div>
+        <div class="wrapper d-flex">
+            <div class="sidebar">
+                <div class="innerSide">
+                    <ul>
+                        <li><a href="#"><i class="fas"></i>Dashboard</a></li>
+                         <li><a href="#"><i class="fas"></i>Product</a></li>
+                        <li><a href="#"><i class="fas"></i>Category</a></li>
+                        <li><a href="#"><i class="fas"></i>Orders</a></li>
+                        <li><a href="#"><i class="fas"></i>Customers</a></li>
+                        <li><a style="color: black;" href="#"><i class="fas fa-arrow-right"></i><strong>Coupon</strong></a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            
+                <div class="row">
+
+                    <form action="/admin/edit-coupon/{{coupon._id}}" method="POST" >
+                        <h2 class="text-center mt-5">Edit Coupon</h2>
+                       <label for="">Code:</label>
+                        <input type="text" name="code" value="{{coupon.code}}" class="form-control" required>
+
+
+                        <label for="">Discount:</label>
+                        <input type="number" name="discount" value="{{coupon.discount}}" class="form-control" min="0" step="0.01" required>
+
+                        <label for="description">Start Date:</label>
+                        <input type="date" name="StartDate" value="{{coupon.StartDate}}" class="form-control" required>
+
+                        <label for="description">End Date:</label>
+                        <input type="date" name="EndDate" value="{{coupon.EndDate}}" class="form-control" required>
+
+                        <label for="description">Max Usage</label>
+                        <input type="number" name="MaxUsage" value="{{coupon.MaxUsage}}" class="form-control" required>
+
+                        <label for="description">Usage Count</label>
+                        <input type="number" name="UsageCount" value="{{coupon.UsageCount}}" class="form-control" required>
+            
+                        
+
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </form>
+
+                </div>
+            
+        </section>
+
+
+    </div>
+
+
+</body>
+<script>
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
