@@ -39,9 +39,16 @@
   }
   
   .main_image {
-    width: auto;
-    height: auto;
-  }
+      max-width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .slide {
+      max-width: 100%;
+      height: auto;
+    }
   
   .option img {
     width: 75px;
@@ -152,7 +159,18 @@
       display: flex;
       flex-wrap: wrap;
     }
+
   }
+      @media only screen and (max-width: 511px) {
+      /* Add this media query to disable zoom effect on mobile screens */
+      .container {
+        pointer-events: none;
+      }
+
+      .option img {
+        pointer-events: auto;
+      }
+    }
 
   </style>
   <section>

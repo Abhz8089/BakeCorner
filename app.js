@@ -14,6 +14,7 @@ var adminRouter = require('./routes/admin');
 var alert  = require("alert");
 var handlebars=require("handlebars")
 const flash = require('connect-flash');
+const nodemailer = require("nodemailer");
 const { body, validationResult } = require('express-validator');
 handlebars.registerHelper('eq', function (value1, value2) {
   return value1 === value2;
@@ -104,4 +105,22 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// function run(){
+  
+//   const transporter = nodemailer.createTransport({
+//     service:'Gmail',
+//     auth: {
+//       user: "owwrutudjpen@exelica.com",
+//       pass: "5'YA6ZVH",
+//     },
+//   });
+// const mailOptions = {
+//   from: '"Fred Foo 👻" <abhijithabhiz8089@gmail.com>',
+//   to: "sanjuag99@gmail.com",
+//   subject: "OTP for sign up",
+//   text: `Your OTP is 1234.`,
+// };
+
+// transporter.sendMail(mailOptions)}
+// run();
 module.exports = app;

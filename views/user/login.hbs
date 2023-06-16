@@ -87,18 +87,7 @@
         </div>
     </div>
   <script> 
-    var state=false;
-    function toggle(){
-        if(state){
-            document.getElementById("password").setAttribute("type","password");
-            document.getElementById("eye").style.color='#7a797e';
-            state=false
-        }else{
-            document.getElementById("password").setAttribute("type","text");
-            document.getElementById("eye").style.color="#5887ef";
-            state=true;
-        }
-    }
+ 
 
    
     var pResetValue = {{#if pReset}}true{{else}}false{{/if}};
@@ -122,6 +111,20 @@ Swal.fire({
    }
 </script>
 
+<script>   
+    var state=false;
+    function toggle(){
+        if(state){
+            document.getElementById("password").setAttribute("type","password");
+            document.getElementById("eye").style.color='#7a797e';
+            state=false
+        }else{
+            document.getElementById("password").setAttribute("type","text");
+            document.getElementById("eye").style.color="#5887ef";
+            state=true;
+        }
+    }
 
+</script>
     
 </body>

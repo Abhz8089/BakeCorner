@@ -17,6 +17,9 @@ const { body, validationResult, Result } = require('express-validator');
 const verifyLogin = async(req, res, next) => {
   if (req.session.user.loggedIn && req.session.user) {
     let cCount=await userHelpers.getCartCount(req.session.user._id)
+    let wallet=await userHelpers.getWallet(req.session.user._id)
+    
+    req.session.user.wallet=wallet;
     req.session.cartCount=cCount;
     next();
   } else {
@@ -66,6 +69,11 @@ router.get("/", function (req, res, next) {
 });
 router.get("/home", async (req, res) => {
   let users = req.session.user;
+  if(users){
+    let wallet=await userHelpers.getWallet(req.session.user._id)
+    
+    req.session.user.wallet=wallet;
+  }
   let cartCount = null;
   let category= await categoryHelpers.getAllCategory()
 
@@ -401,17 +409,24 @@ router.post('/use-wallet',async(req,res)=>{
   let userId=req.body.userId;
   let wallet=req.body.wallet;
   let Amount=req.session.user.totalValue
-  let balance=Math.abs(Amount-wallet);
-  req.session.user.totalValue=balance;
+  req.session.user.orginalVal=Amount;
+  let balance=0;
+  let giveWallet=0
   req.session.walletApply=true;
+  req.session.OrginalWal=wallet;
   if(Amount<wallet){
-    req.session.balance=balance;
+    
+    req.session.user.totalValue=0;
+    req.session.balance=0;
+    giveWallet=wallet-Amount;
   }else{
-    req.session.balance=null;
+    balance=Math.abs(Amount-wallet);
+    req.session.balance=balance;
+    
   }
   let response={}
   response.total=balance;
-
+  response.wallet=giveWallet;
   res.json(response)
  
 })
@@ -583,9 +598,15 @@ router.get("/user-address/:id", async (req, res) => {
 router.get("/order-success", async(req, res) => {
 let totalVal=req.session.user.totalValue;
 let userId=req.session.user._id;
+let orginalWal=req.session.OrginalWal
 if(req.session.walletApply){
+  let orginalVal=req.session.user.orginalVal
   let remainingWal=req.session.balance
-  if(remainingWal==null){
+
+  if(remainingWal==0){
+    
+    remainingWal=orginalWal-orginalVal;
+  }else{
     remainingWal=0;
   }
   await userHelpers.changeWallet(remainingWal,userId)
@@ -608,13 +629,13 @@ if(coupon){
   res.render("user/order-success", { users: req.session.user, user: true ,coupon});
 });
 
-router.get("/orders", async (req, res) => {
+router.get("/orders",verifyLogin, async (req, res) => {
   let orders = await userHelpers.getUserOrders(req.session.user._id);
  
   res.render("user/orders", { users: req.session.user, orders, user: true });
 });
 
-router.get("/view-order-products/:id", async (req, res) => {
+router.get("/view-order-products/:id",verifyLogin, async (req, res) => {
   let users = req.session.user;
   let cartCount = req.session.cartCount;
 

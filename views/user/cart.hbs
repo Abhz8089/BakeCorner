@@ -179,7 +179,8 @@
                     
                 </div>
                       <form action="">
-                        <label for="">Wallet Amount: <b>₹{{walletAmount}}</b></label>
+                        <label for="" >Wallet Amount: </label>
+                        <b id="wallet">₹{{walletAmount}}</b>
                         <div>
                         <button class="btn btn-success " onclick="walletApply('{{user}}','{{walletAmount}}',event)">Apply</button>
                         </div>
@@ -267,6 +268,7 @@
                     document.getElementById('total1').innerHTML = response.total
                     document.getElementById('total2').innerHTML = response.total
                     document.getElementById('total3').innerHTML = response.total
+                    document.getElementById('wallet').innerHTML =response.wallet
             }
         })
     }
