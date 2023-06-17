@@ -37,7 +37,7 @@ productHelpers.getAllProducts().then((products)=>{
 
 router.get('/adminLogin',function(req,res){
   if(req.session.admin){
-    res.redirect("/admin")  //--c
+    res.redirect("/admin")
   }
   else{
     res.render("admin/adminlogin",{"loginErr":req.session.adminLoginErr})
