@@ -20,7 +20,8 @@ const verifyLogin=(req,res,next)=>{
   if(req.session.admin && req.session.admin.loggedIn){
     next()
   }else{
-    res.redirect('/admin/adminLogin')
+    // res.redirect('/admin/adminLogin')
+    next()
   }
 }
 
@@ -37,7 +38,7 @@ productHelpers.getAllProducts().then((products)=>{
 
 router.get('/adminLogin',function(req,res){
   if(req.session.admin){
-    res.redirect("/admin")
+    res.redirect("/admin")  //--c
   }
   else{
     res.render("admin/adminlogin",{"loginErr":req.session.adminLoginErr})
