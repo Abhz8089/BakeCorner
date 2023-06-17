@@ -15,7 +15,7 @@ const PDFDocument = require('pdfkit');
 
 
 
-/* GET users listing. */
+
 const verifyLogin=(req,res,next)=>{
   if(req.session.admin && req.session.admin.loggedIn){
     next()
@@ -64,28 +64,7 @@ router.post('/adminLogin',(req,res)=>{
   })
 })
 
-     //verify login start
-// router.get('/add-product',verifyLogin,async(req,res)=>{
-//   let category= await categoryHelpers.getAllCategory()
-//   res.render("admin/add-product",{admin:true,user:false,guest:false,category})
-// })
 
-
-// router.post('/add-product',(req,res)=>{
-//   productHelpers.addProduct(req.body,(id)=>{
-//     let image=req.files.image
-   
-//     image.mv('./public/images/'+id+'.jpg',(err,done)=>{
-//     if(!err){
-//        res.redirect('/admin')
-//    }else{
-//       console.log("this is the error   :"+err);
-//     }
-//    })
-   
-// })
-
-// })
 
 //-----------------multer---------------------------------------------------------------------------------------------------------
 
@@ -121,44 +100,6 @@ const path = require('path');
 
 
 
-// router.post('/add-product', upload.array('image', 4), (req, res) => {
-//    console.log(req.files)
-   
-//   const{
-//     name,
-//     category,   
-//     price,
-//     description 
-    
-//  } = req.body;
-//  console.log(req.body)
-
-//    const photos=req.files.map((file)=>{
-//       const oldPath = `${file.path}`;
-//       const newPath = `${file.path}.png`;
-//       if(fs.existsSync(oldPath)){
-//         fs.rename(oldPath,newPath,function(err){
-//           if(err)throw err;
-//           console.log('file renamed')
-//         })
-//       }else{
-//         console.log(('not renamed'));
-//       }
-//       return {
-//         // id:  path.basename(newPath),
-//         title: file.originalname,
-        
-//          fileName: newPath
-//       };
-//     })
-//    let caName=name.toUpperCase()
-//   productHelpers.addProduct({name:caName,category:category,price:price,description:description,photos:photos}, (id) => {
- 
-//     req.session.admin.loggedIn=true
-//     res.redirect('/admin')
-  
-//   })
-// });
 
 // //----------------crop feature-----------------------------------
 
