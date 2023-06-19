@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs =require("express-handlebars")
-// var fileUpload=require("express-fileupload")
+
 var multer=require("multer")
 var db=require('./config/connection');
 var session =require('express-session');
