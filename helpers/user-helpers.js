@@ -86,70 +86,7 @@ module.exports ={
       })
 
     },
-    doMailVarifySuccess:(userOtp)=>{
-      return new Promise(async(resolve,reject)=>{
-          await db.get().collection(collection.USER_COLLECTION).updateOne({otp:userOtp.otp},{$set:{isBlocked:false}},(err,result)=>{
-              if(err){
-                  console.log("error :"+err)
-                  res.status(500).send("Error blocking")
-              }else{
-                  console.log('User Blocked')
-                  resolve("success")
-                  alert("Account successfully created")
-              }
-          })
-      })
-
-    },
-    deleteBlockedUser:(otpuser)=>{
-       return new Promise(async(resolve,reject)=>{
-        
-        await db.get().collection(collection.USER_COLLECTION).deleteOne({otp:otpuser}).then(()=>{
-          alert('wrong Otp')
-          resolve()
-        })
-       
-        
-       })
-    },
-
-
-
-    doMailCheck:(userOtp)=>{
-
-      return new Promise(async(resolve,reject)=>{
-        let response={}
-       let getOtp= await db.get().collection(collection.USER_COLLECTION).findOne({otp:userOtp.otp})
-      
-     
-       
-       if(getOtp){
-           
-           response.status=true
-           resolve(response)
-       }
-       else{
-        response.status=false
-        
-        resolve(response)
-       }
-      })
-
-    },
-    insertOtp:(userData,userotp)=>{
    
-      return new Promise(async(resolve,reject)=>{
-        await db.get().collection(collection.USER_COLLECTION).updateOne({email:userData.email},{$set:{otp:userotp}},(err,result)=>{
-          if(err){
-              console.log("error :"+err)
-              res.status(500).send("Error blocking")
-          }else{
-              console.log("otp set cheythu")
-              resolve("success")
-          }
-      })
-      })
-    },
     addToCart:(proId,userId,image)=>{
       let proObj={
         item:objectId(proId),
