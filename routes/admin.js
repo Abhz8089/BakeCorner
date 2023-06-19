@@ -59,14 +59,14 @@ router.post("/adminLogin", (req, res) => {
 const upload = multer({
   dest: "public/images",
   limits: {
-    fieldSize: 10 * 1024 * 1024, // Increase the limit to 10MB (adjust the value as needed)
+    fieldSize: 10 * 1024 * 1024, 
   },
   fileFilter: (req, file, cb) => {
-    // Check if the file has a valid image extension
+   
     const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
     const ext = path.extname(file.originalname).toLowerCase();
     if (allowedExtensions.includes(ext)) {
-      // Check if the file has the expected extension
+     
       const originalExt = path.extname(file.originalname).toLowerCase();
       if (originalExt === ext) {
         cb(null, true); // Accept the file
@@ -79,7 +79,7 @@ const upload = multer({
   },
 });
 
- //const upload = multer({ dest:'public/images'});
+
 const path = require("path");
 
 //-------------------------------add product---------------------------------
@@ -502,7 +502,7 @@ router.post("/download", async (req, res) => {
   doc.text("Date:", 250, y + 80);
   doc.text(date, 350, y + 80);
 
-  // Pipe the PDF document to the response
+ 
   doc.pipe(res);
 
   // End the document

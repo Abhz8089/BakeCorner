@@ -15,17 +15,17 @@ module.exports = {
       if (admin) {
         bcrypt.compare(adminData.password, admin.password).then((status) => {
           if (status) {
-            console.log("login success");
+         
             response.admin = admin;
             response.status = true;
             resolve(response);
           } else {
-            console.log("login fail");
+         
             resolve({ status: false });
           }
         });
       } else {
-        console.log("login failed");
+      
         resolve({ status: false });
       }
     });
@@ -60,10 +60,10 @@ module.exports = {
           { $set: { isBlocked: true } },
           (err, result) => {
             if (err) {
-              console.log("error :" + err);
+          
               res.status(500).send("Error blocking");
             } else {
-              console.log("User Blocked");
+          
               resolve("success");
             }
           }
@@ -80,10 +80,10 @@ module.exports = {
           { $set: { isBlocked: false } },
           (err, result) => {
             if (err) {
-              console.log("error :" + err);
+        
               res.status(500).send("Error unblocking");
             } else {
-              console.log("User unBlocked");
+          
               resolve("success");
             }
           }
@@ -150,7 +150,7 @@ module.exports = {
           },
         ])
         .toArray();
-      console.log(totalPrize);
+   
       resolve(totalPrize[0].totalPrize);
     });
   },
@@ -179,7 +179,7 @@ module.exports = {
           },
         ])
         .toArray();
-      console.log(totalPrize);
+  
       resolve(totalPrize[0].totalPrize);
     });
   },
@@ -208,7 +208,7 @@ module.exports = {
           },
         ])
         .toArray();
-      console.log(totalPrize);
+
       resolve(totalPrize[0].totalPrize);
     });
   },
@@ -227,8 +227,7 @@ module.exports = {
               $lte: endDate,
             },
           });
-        console.log(orderCount);
-        console.log("orderCount");
+     
         resolve(orderCount);
       } catch (error) {
         reject(error);
@@ -250,8 +249,7 @@ module.exports = {
               $lte: endDate,
             },
           });
-        console.log(orderCount);
-        console.log("orderCount");
+   
         resolve(orderCount);
       } catch (error) {
         reject(error);
@@ -273,8 +271,7 @@ module.exports = {
               $lte: endDate,
             },
           });
-        console.log(orderCount);
-        console.log("orderCount");
+
         resolve(orderCount);
       } catch (error) {
         reject(error);
@@ -310,8 +307,8 @@ module.exports = {
 
         // Extract the total quantity from the result
         const totalQuantity = result.length > 0 ? result[0].totalQuantity : 0;
-        console.log(totalQuantity);
-        console.log("totalQuantity");
+ 
+
         resolve(totalQuantity);
       } catch (error) {
         reject(error);
@@ -347,8 +344,7 @@ module.exports = {
 
         // Extract the total quantity from the result
         const totalQuantity = result.length > 0 ? result[0].totalQuantity : 0;
-        console.log(totalQuantity);
-        console.log("totalQuantity");
+ 
         resolve(totalQuantity);
       } catch (error) {
         reject(error);
@@ -384,7 +380,7 @@ module.exports = {
 
         // Extract the total quantity from the result
         const totalQuantity = result.length > 0 ? result[0].totalQuantity : 0;
-        console.log(totalQuantity);
+
 
         resolve(totalQuantity);
       } catch (error) {
